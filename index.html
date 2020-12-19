@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>VertexStudio</title>
+    <style>
+        #canvas{
+            position: absolute;
+            display: block;
+            left:0;
+            top:0;
+            background: #0f0f0f;
+            z-index: -1;
+        }
+    </style>
+<style>
+@keyframes scaleDraw {  /*定义关键帧、scaleDrew是需要绑定到选择器的关键帧名称*/
+            0%{
+                transform: scale(1);  /*开始为原始大小*/
+            }
+            25%{
+                transform: scale(1.1); /*放大1.1倍*/
+            }
+            50%{
+                transform: scale(1);
+            }
+            75%{
+                transform: scale(1.1);
+            }
+        }
+
+ ul li ul {
+  position: relative;
+  min-height: 5%;
+  font-family: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+  font-size: 17px;
+  line-height: 4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+box2 {
+position: absolute;
+left: 50%;
+top: 50%;
+/* 设置元素的相对于自身的偏移度为负50%(也就是元素自身尺寸的一半)*/
+transform: translate(-50%, -50%);
+}
+@keyframes fade-in {  
+    0% {opacity: 0;}/*过渡状态 透明度为0*/  
+    40% {opacity: 0;}/*过渡状态 透明度为0*/  
+    100% {opacity: 1;}/*结束状态 透明度为1*/  
+}  
+@-webkit-keyframes fade-in {/*针对webkit内核*/
+    0% {opacity: 0;}/*过渡状态 透明度为0*/  
+    40% {opacity: 0;}  
+    100% {opacity: 1;}  
+}  
+@keyframes move-appear{
+	from{
+		transform: translate(0,-10%);
+		opacity: 0;
+	}
+	to{
+		transform: translate(0,0);
+		opacity: 1;
+	}
+}
+</style>
+<style>
+#button {
+		font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+		position: absolute;
+		font-size: 1.5em;
+		text-transform: uppercase;
+		padding: 7px 20px;
+		left: 50%;
+		width: 200px;
+		margin-left: -100px;
+		top: 60%;
+		border-radius: 10px;
+		color: white;
+		text-shadow: -1px -1px 1px rgba(0,0,0,0.8);
+		border: 5px solid transparent;
+		border-bottom-color: rgba(0,0,0,0.35);
+		background: hsla(260, 100%, 50%, 1);
+		cursor: pointer;
+
+		animation: pulse 1s infinite alternate;
+		transition: background 0.4s, border 0.2s, margin 0.2s;
+	}
+	#button:hover {
+		background: hsla(220, 100%, 60%, 1);
+		margin-top: -1px;
+
+		animation: none;
+	}
+	#button:active {
+		border-bottom-width: 0;
+		margin-top: 5px;
+	}
+	@keyframes pulse {
+		0% {
+			margin-top: 0px;
+		}
+		100% {
+			margin-top: 6px; 
+		} 
+	}
+#gradient{animation:change 20s infinite;font-weight:100; font-family:Arial,Verdana,Sans-serif,HelveticaNeue LT 33 ThinEx}
+@keyframes change{0%{color:#5cb85c;}10%{color:#556bd8;}20%{color:#F44336;}30%{color:#66e616;}40% {color:#67bd31;}50%{color:#FF8E37;}60%{color:#1488F4;}70%{color:#87C540;}80%{color:#33FF8A;}90%{color:#FEFEFE;}100%{color:#5cb85c;}}
+</style>
+       <style type="text/css">
+        .top{
+    /* 设置宽度高度背景颜色 */
+    height: auto; /*高度改为自动高度*/
+    width:100%;
+    margin-left: 0;
+    background:rgba(37,42,51,1.00);
+    position: fixed; /*固定在顶部*/
+    top: 0;/*离顶部的距离为0*/
+    margin-bottom: 5px;
+}
+.top ul{
+    /* 清除ul标签的默认样式 */
+    width: auto;/*宽度也改为自动*/
+    list-style-type: none;
+    white-space:nowrap;
+    overflow: hidden;
+    margin-left: 12%;
+    /* margin-top: 0;          */
+    padding: 0;
+
+}
+.top li {
+    float:left; /* 使li内容横向浮动，即横向排列  */
+    margin-right:2%;  /* 两个li之间的距离*/
+    position: relative;
+    overflow: hidden;
+}
+
+.top li a{
+   /* 设置链接内容显示的格式*/
+    display: block; /* 把链接显示为块元素可使整个链接区域可点击 */
+    color:white;
+    text-align: center;
+    padding: 3px;
+    overflow: hidden;
+    text-decoration: none; /* 去除下划线 */
+    
+}
+.top li a:hover{
+    /* 鼠标选中时背景变为黑色 */
+    /*background-color: #111;*/
+    -webkit-animation: scaleDraw 5s ease-in-out infinite;
+}
+.top ul li ul{
+    /* 设置二级菜单 */
+    margin-left: -0.2px;
+    background:rgba(60,60,60,1.00);
+    position: relative;
+    display: none; /* 默认隐藏二级菜单的内容 */
+
+}
+.top ul li ul li{
+    /* 二级菜单li内容的显示 */
+    
+    float:none;
+    text-align: center;
+}
+.top ul li:hover ul{
+    /* 鼠标选中二级菜单内容时 */
+    animation: fade-in;/*动画名称*/  
+    animation-duration: 0.7s;/*动画持续时间*/  
+    -webkit-animation:fade-in 0.7s;/*针对webkit内核*/  
+    display: block;
+}
+.top ri {
+    float:right; /* 使li内容横向浮动，即横向排列  */
+    margin-right:13.5%;  /* 两个li之间的距离*/
+    position: relative;
+    overflow: hidden;
+}
+
+.top ri a{
+   /* 设置链接内容显示的格式*/
+    display: block;  /*把链接显示为块元素可使整个链接区域可点击 */
+    color:white;
+    text-align: center;
+    padding: 3px;
+    overflow: hidden;
+    text-decoration: none; /* 去除下划线 */
+    
+}
+.top ri a:hover{
+    /* 鼠标选中时背景变为黑色 */
+    background-color: #00A4EF;
+}
+body{
+    background:#494A5F;
+    /* 这里是颜色设定啦！QwQ还原色#eff3f5 */
+}	  
+</style>
+
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+var $ = {};
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    var opt = {
+        particleAmount: 50,     //粒子个数
+        defaultSpeed: 0.8,        //粒子运动速度
+        variantSpeed: 1,        //粒子运动速度的变量
+        particleColor: 'hsl(' + 360 * Math.random() + ', 100%, 60%)',       //粒子的颜色
+        lineColor:'hsl(' + 360 * Math.random() + ', 320%, 60%)',            //网格连线的颜色
+        defaultRadius: 2,           //粒子半径
+        variantRadius: 2,           //粒子半径的变量
+        minDistance: 200            //粒子之间连线的最小距离
+    };
+    var line = opt.lineColor.match(/\d+/g);
+    console.log(line);
+    var particle = [], w,h;
+    var delay = 200,tid;
+    init();
+    window.addEventListener("resize",function(){
+        winResize()
+    },false);
+
+    function winResize(){
+        clearTimeout(tid);
+        tid = setTimeout(function(){
+            getSize();
+        },delay)
+    }
+
+    function init(){
+        getSize();
+        for(let i = 0;i<opt.particleAmount; i++){
+            particle.push(new Partical());
+        }
+        loop();
+    }
+
+    function loop(){
+        ctx.clearRect(0,0,w,h);
+        for(let i = 0;i<particle.length; i++){
+            particle[i].update();
+            particle[i].draw();
+        }
+        for(let i = 0;i<particle.length; i++){
+            linePoint(particle[i],particle)
+        }
+        window.requestAnimationFrame(loop);
+    }
+
+    function linePoint(point,hub){
+        for(let i = 0;i<hub.length;i++){
+            let distance = getDistance(point,hub[i]);
+            let opacity = 1 -distance/opt.minDistance;
+            if(opacity > 0){
+                ctx.lineWidth = 0.5;
+                ctx.strokeStyle = "rgba("+line[0]+","+line[1]+","+line[2]+","+opacity+")";
+                ctx.beginPath();
+                ctx.moveTo(point.x,point.y);
+                ctx.lineTo(hub[i].x,hub[i].y);
+                ctx.closePath();
+                ctx.stroke();
+            }
+        }
+    }
+
+    function getDistance(point1,point2){
+        return Math.sqrt(Math.pow(point1.x-point2.x,2) + Math.pow(point1.y - point2.y ,2));
+    }
+
+    function getSize(){
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+    }
+    function Partical(){
+        this.x = Math.random()*w;           //粒子的x轴坐标
+        this.y = Math.random()*h;           //粒子的y轴坐标
+        this.speed = opt.defaultSpeed + opt.variantSpeed*Math.random();     //粒子的运动速度
+        this.directionAngle = Math.floor(Math.random()*360);                //粒子运动的方向
+        this.color = opt.particleColor ;                                    //粒子的颜色
+        this.radius = opt.defaultRadius+Math.random()*opt.variantRadius;    //粒子的半径大小
+        this.vector = {
+            x:this.speed * Math.cos(this.directionAngle),       //粒子在x轴的速度
+            y:this.speed * Math.sin(this.directionAngle)        //粒子在y轴的速度
+        }
+        this.update = function(){                   //粒子的更新函数
+            this.border();                           //判断粒子是否到了边界
+            this.x += this.vector.x;                //粒子下一时刻在x轴的坐标
+            this.y += this.vector.y;                //粒子下一时刻在y轴的坐标
+        }
+        this.border = function(){               //判断粒子是都到达边界
+            if(this.x >= w || this.x<= 0){      //如果到达左右边界，就让x轴的速度变为原来的负数
+                this.vector.x *= -1;
+            }
+            if(this.y >= h || this.y <= 0){     //如果到达上下边界，就让y轴的速度变为原来的负数
+                this.vector.y *= -1;
+            }
+            if(this.x > w){                     //下面是改变浏览器窗口大小时的操作，改变窗口大小后有的粒子会被隐藏，让他显示出来即可
+                this.x = w;
+            }
+            if(this.y > h){
+                this.y = h;
+            }
+            if(this.x < 0){
+                this.x = 0;
+            }
+            if(this.y < 0){
+                this.y = 0;
+            }
+        }
+        this.draw = function(){                 //绘制粒子的函数
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius ,0 ,Math.PI * 2);
+            ctx.closePath();
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+    }
+</script>
+<body>
+            <div class="top">
+                   <center> 
+                    <ul>
+                    <li><a href="#">主站</a></li>
+						
+			    <ri><a href="studio.endermo">查看docs</a></ri>
+						<li>
+						<a href="#">传送门</a>
+						<ul>
+						<li><a href="Hub/EMOS/CLoad" style="color:#3c4e;">EMOS着色器</a></li>
+                                                <li><a href="https://jq.qq.com/?_wv=1027&k=glGHx14l" style="color:#bf2f3e;">小末工作室</a></li>
+						<li><a href="https://api.endermo.xyz/" style="color:#ec4e6e;">API入口</a></li>
+						</ul>       
+                      </ul>
+                    </center> 
+            </div>
+<div id="gradient">
+<box2 style="font-size:64px">VertexStudio</box2>
+</div>
+  <button id="button">现在加入</button>
+</body>
+</html>
+
