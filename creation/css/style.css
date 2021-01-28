@@ -1,12 +1,14 @@
 body {
   background: #2E3440;
 }
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+.link{
 a{text-decoration: none;color:#fff}   
 a:visited{text-decoration: none; color:#fff}    
 a:hover {text-decoration: none;color:#006B54}    
 a:active{text-decoration:none;color:#fff}    
-*, *::before, *::after {
-  box-sizing: border-box;
 }
 .honeycomb {
   display: flex;
