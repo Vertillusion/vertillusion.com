@@ -4,12 +4,10 @@ body {
 *, *::before, *::after {
   box-sizing: border-box;
 }
-.link{
 a{text-decoration: none;color:#fff}   
 a:visited{text-decoration: none; color:#fff}    
 a:hover {text-decoration: none;color:#006B54}    
 a:active{text-decoration:none;color:#fff}    
-}
 .honeycomb {
   display: flex;
   flex-wrap: wrap;
