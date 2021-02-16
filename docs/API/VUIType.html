@@ -62,6 +62,31 @@ Data1(int a;):a=0<br />
 Data2 (int a;int b;int c;):a = 1,b = 2 ,c =3.<br />
 StringData(char) : "text" <br />
     </div>
+输出方案示例(C++)
+<div style="background-color:#2E3440;color:#CCCCCC;">
+    char DataChar[128] = "0"; <br />
+    char StrChar[128] = "text";  <br />
+    FILE* fp = fopen("test.vui", "wt"); <br />
+    if (!fp) <br />
+    { <br />
+        //无法写入时要做的处理 <br />
+    } <br />
+    if (fp) <br />
+    { <br />
+        fprintf(fp, <br />
+            "OBJECT1{", //创建对象 <br />
+            "Data(", //新建数据 <br />
+            DataChar , //参数 <br />
+            "),"//Data的结尾 <br />
+            "string(", //新建字符数据 <br />
+            StrChar ,//字符 <br />
+            ")}"//结尾 <br />
+        ); <br />
+        fclose(fp); <br />
+    }<br />
+ <br />
+</div>
+如上,输出结果应为 OBJECT1{Data(0),string(text)}
 </div>
 <script src="../min/js/menu.js"></script> <!--控制js-->
 
