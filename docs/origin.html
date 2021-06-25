@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>VertexStudio</title>
+	<meta name="keywords" content="VertexStudio"/>
+		<meta name="description" content="VertexStudio的创作小站 qwq"/>
+	   	<link rel="icon" href="image/LOGO.png"/>
+    <style>
+        #canvas{
+            position: absolute;
+            display: block;
+            left:0;
+            top:0;
+            background: #0f0f0f;
+            z-index: -1;
+        }
+    </style>
+<style>
+@keyframes scaleDraw {  /*定义关键帧、scaleDrew是需要绑定到选择器的关键帧名称*/
+            0%{
+                transform: scale(1);  /*开始为原始大小*/
+            }
+            25%{
+                transform: scale(1.1); /*放大1.1倍*/
+            }
+            50%{
+                transform: scale(1);
+            }
+            75%{
+                transform: scale(1.1);
+            }
+        }
+
+ ul li ul {
+  position: relative;
+  min-height: 5%;
+  font-family: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+  font-size: 17px;
+  line-height: 4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+box2 {
+position: absolute;
+left: 50%;
+top: 50%;
+/* 设置元素的相对于自身的偏移度为负50%(也就是元素自身尺寸的一半)*/
+transform: translate(-50%, -50%);
+}
+@keyframes fade-in {  
+    0% {opacity: 0;}/*过渡状态 透明度为0*/  
+    40% {opacity: 0;}/*过渡状态 透明度为0*/  
+    100% {opacity: 1;}/*结束状态 透明度为1*/  
+}  
+@-webkit-keyframes fade-in {/*针对webkit内核*/
+    0% {opacity: 0;}/*过渡状态 透明度为0*/  
+    40% {opacity: 0;}  
+    100% {opacity: 1;}  
+}  
+@keyframes move-appear{
+	from{
+		transform: translate(0,-10%);
+		opacity: 0;
+	}
+	to{
+		transform: translate(0,0);
+		opacity: 1;
+	}
+}
+</style>
+	<script type="text/javascript"> 
+ 
+!function (e, t, a) {function r() {for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");requestAnimationFrame(r)}function n() {var t = "function" == typeof e.onclick && e.onclick;e.onclick = function (e) {t && t(), o(e)}}function o(e) {var a = t.createElement("div");a.className = "heart", s.push({el: a,x: e.clientX - 5,y: e.clientY - 5,scale: 1,alpha: 1,color: c()}), t.body.appendChild(a)}function i(e) {var a = t.createElement("style");a.type = "text/css";try {a.appendChild(t.createTextNode(e))} catch (t) {a.styleSheet.cssText = e}t.getElementsByTagName("head")[0].appendChild(a)}function c() {return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"}var s = [];e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {setTimeout(e, 1e3 / 60)}, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()}(window, document);
+ 
+</script>
+<style>
+	
+.white{
+	-webkit-text-decoration: none;
+	text-decoration: none;
+	color:#fff;
+	}
+.white_B{
+	-webkit-text-decoration: none;
+	text-decoration: none;
+	position: absolute;
+	bottom:40px;
+	left:47.5%;
+	color:#fff;
+	}
+#button {
+		font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+		position: absolute;
+		font-size: 1.5em;
+		text-transform: uppercase;
+		padding: 7px 20px;
+		left: 50%;
+		width: 200px;
+		margin-left: -100px;
+		top: 60%;
+		border-radius: 10px;
+		color: white;
+		text-shadow: -1px -1px 1px rgba(0,0,0,0.8);
+		border: 5px solid transparent;
+		border-bottom-color: rgba(0,0,0,0.35);
+		background: hsla(260, 100%, 50%, 1);
+		cursor: pointer;
+-webkit-text-decoration: none;
+	text-decoration: none;
+		animation: pulse 1s infinite alternate;
+		transition: background 0.4s, border 0.2s, margin 0.2s;
+	}
+	#button:hover {
+		background: hsla(220, 100%, 60%, 1);
+		margin-top: -1px;
+
+		animation: none;
+	}
+	#button:active {
+		border-bottom-width: 0;
+		margin-top: 5px;
+	}
+	@keyframes pulse {
+		0% {
+			margin-top: 0px;
+		}
+		100% {
+			margin-top: 6px; 
+		} 
+	}
+#gradient{animation:change 20s infinite;font-weight:100; font-family:Arial,Verdana,Sans-serif,HelveticaNeue LT 33 ThinEx; -webkit-font-family:Arial,Verdana,Sans-serif,HelveticaNeue LT 33 ThinEx }
+@keyframes change{0%{color:#5cb85c;}10%{color:#556bd8;}20%{color:#F44336;}30%{color:#66e616;}40% {color:#67bd31;}50%{color:#FF8E37;}60%{color:#1488F4;}70%{color:#87C540;}80%{color:#33FF8A;}90%{color:#FEFEFE;}100%{color:#5cb85c;}}
+</style>
+       <style type="text/css">
+        .top{
+    /* 设置宽度高度背景颜色 */
+    height: auto; /*高度改为自动高度*/
+    width:100%;
+    margin-left: 0;
+    background:rgba(37,42,51,0.0);
+    position: fixed; /*固定在顶部*/
+		left:0;
+    top: 0;/*离顶部的距离为0*/
+    margin-bottom: 5px;
+    backdrop-filter:blur(10px);
+}
+.top ul{
+    /* 清除ul标签的默认样式 */
+    width: auto;/*宽度也改为自动*/
+    list-style-type: none;
+    white-space:nowrap;
+    overflow: hidden;
+    margin-left: 12%;
+    /* margin-top: 0;          */
+    padding: 0;
+
+}
+.top li {
+    float:left; /* 使li内容横向浮动，即横向排列  */
+    margin-right:2%;  /* 两个li之间的距离*/
+    position: relative;
+    overflow: hidden;
+}
+
+.top li a{
+   /* 设置链接内容显示的格式*/
+    display: block; /* 把链接显示为块元素可使整个链接区域可点击 */
+    color:white;
+    text-align: center;
+    padding: 3px;
+    overflow: hidden;
+    text-decoration: none; /* 去除下划线 */
+    
+}
+.top li a:hover{
+    /* 鼠标选中时背景变为黑色 */
+    /*background-color: #111;*/
+    -webkit-animation: scaleDraw 5s ease-in-out infinite;
+}
+.top ul li ul{
+    /* 设置二级菜单 */
+    margin-left: -0.2px;
+    background:rgba(60,60,60,1.00);
+    position: relative;
+    display: none; /* 默认隐藏二级菜单的内容 */
+
+}
+.top ul li ul li{
+    /* 二级菜单li内容的显示 */
+    
+    float:none;
+    text-align: center;
+}
+.top ul li:hover ul{
+    /* 鼠标选中二级菜单内容时 */
+    animation: fade-in;/*动画名称*/  
+    animation-duration: 0.6s;/*动画持续时间*/  
+    -webkit-animation:fade-in 0.6s;/*针对webkit内核*/  
+    display: block;
+}
+.top ri {
+    float:right; /* 使li内容横向浮动，即横向排列  */
+    margin-right:13.5%;  /* 两个li之间的距离*/
+    position: relative;
+    overflow: hidden;
+}
+
+.top ri a{
+   /* 设置链接内容显示的格式*/
+    display: block;  /*把链接显示为块元素可使整个链接区域可点击 */
+    color:white;
+    text-align: center;
+    padding: 3px;
+    overflow: hidden;
+    text-decoration: none; /* 去除下划线 */
+    
+}
+.top ri a:hover{
+    /* 鼠标选中时背景变为黑色 */
+    background-color: #00A4EF;
+}
+body{
+    background:#494A5F;
+    /* 这里是颜色设定啦！QwQ还原色#eff3f5 */
+}
+input{
+	overflow:hidden;
+	width:0;
+	height:0;
+	       }
+</style>
+<style>
+#nav1,#nav1 + a{
+    left:0%;
+}
+#nav2,#nav2 + a{
+    left:20%;
+}
+#nav3,#nav3 + a{
+    left:50%;
+}
+#nav4,#nav4 + a{
+    left:60%;
+}
+#nav5,#nav5 + a{
+    left:80%;
+}
+.scroll,.panel{
+    width:100%;
+    height:100%;
+    position:relative;
+    text-align:center;
+}
+.scroll{
+    left:0;
+    top:0;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: all 0.6s ease-in-out;
+    -moz-transition: all 0.6s ease-in-out;
+    -o-transition: all 0.6s ease-in-out;
+    transition: all 0.6s ease-in-out;
+    color:#e23a6e;
+    font-weight:bold;
+}
+/*动画*/
+#nav1:checked ~ .scroll #panel1 h1{
+    -webkit-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+    -o-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+    animation: moveDown 0.6s ease-in-out 0.2s backwards;
+}
+#nav2:checked ~ .scroll #panel2 h1{
+    -webkit-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+    -o-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+    animation: moveDown 0.6s ease-in-out 0.2s backwards;
+}
+#nav3:checked ~ .scroll #panel3 h1{
+    -webkit-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+    -o-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+    animation: moveDown 0.6s ease-in-out 0.2s backwards;
+}
+#nav4:checked ~ .scroll #panel4 h1{
+    -webkit-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+    -o-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+    animation: moveDown 0.6s ease-in-out 0.2s backwards;
+}
+#nav5:checked ~ .scroll #panel5 h1{
+    -webkit-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+    -o-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+    animation: moveDown 0.6s ease-in-out 0.2s backwards;
+}
+@keyframes moveDown {
+    0%{
+        -webkit-transform: translateY(-40px);
+        -moz-transform: translateY(-40px);
+        -ms-transform: translateY(-40px);
+        -o-transform: translateY(-40px);
+        transform: translateY(-40px);
+        opacity:0;
+    }
+    100%{
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+        transform: translateY(0);
+        opacity:1;
+    }
+}
+.panel p{
+    color:#000;
+}
+#nav1:checked ~ .scroll{
+     -webkit-transform: translateY(0%);
+     -moz-transform: translateY(0%);
+     -ms-transform: translateY(0%);
+     -o-transform: translateY(0%);
+     transform: translateY(0%);
+ }
+#nav2:checked ~ .scroll{
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+#nav3:checked ~ .scroll{
+    -webkit-transform: translateY(-200%);
+    -moz-transform: translateY(-200%);
+    -ms-transform: translateY(-200%);
+    -o-transform: translateY(-200%);
+    transform: translateY(-200%);
+}
+#nav4:checked ~ .scroll{
+    -webkit-transform: translateY(-300%);
+    -moz-transform: translateY(-300%);
+    -ms-transform: translateY(-300%);
+    -o-transform: translateY(-300%);
+    transform: translateY(-300%);
+}
+#nav5:checked ~ .scroll{
+    -webkit-transform: translateY(-400%);
+    -moz-transform: translateY(-400%);
+    -ms-transform: translateY(-400%);
+    -o-transform: translateY(-400%);
+    transform: translateY(-400%);
+}
+.icon{
+    width:200px;
+    height:200px;
+    background:#fa96b5;
+    -webkit-transform:translateY(-50%) rotate(45deg);
+    -moz-transform:translateY(-50%) rotate(45deg);
+    -ms-transform:translateY(-50%) rotate(45deg);
+    -o-transform:translateY(-50%) rotate(45deg);
+    transform:translateY(-50%) rotate(45deg);
+    position:absolute;
+    left:50%;
+    top:0;
+    margin-left:-100px;
+}
+[data-icon]:after{
+    content:attr(data-icon);
+    width:200px;
+    height:200px;
+    color:#fff;
+    font-size:90px;
+    text-align:center;
+    line-height:200px;
+    position:absolute;
+    left:18%;
+    top:18%;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+</style>
+<script>
+    window.onload= function () {
+        var scroll=document.getElementsByClassName("scroll")[0];//ie不兼容，换成id会成功
+        var panel=document.getElementsByClassName("panel");//ie不兼容，换成id会成功
+ 
+        var clientH=window.innerHeight;
+        scroll.style.height=clientH+"px";
+        for(var i=0;i<panel.length;i++){
+            panel[i].style.height=clientH+"px";
+        }
+        /*下面是关于鼠标滚动*/
+        var inputC=document.getElementsByTagName("input");
+        var wheel= function (event) {
+            var delta=0;
+            if(!event)//for ie
+                event=window.event;
+            if(event.wheelDelta){//ie,opera
+                delta=event.wheelDelta/120;
+            }else if(event.detail){
+                delta=-event.detail/3;
+            }
+            if(delta){
+                handle(delta,inputC);
+            }
+            if(event.preventDefault)
+                event.preventDefault();
+            event.returnValue=false;
+        };
+        if(window.addEventListener){
+            window.addEventListener('DOMMouseScroll',wheel,false);
+        }
+        window.onmousewheel=wheel;
+    };
+    function handle(delta,arr) {
+        var num;
+        for(var i=0;i<arr.length;i++){//得到当前checked元素的下标
+            if(arr[i].checked){
+                num=i;
+            }
+        }
+        if(delta>0 && num>0){//向上滚动
+            num--;
+            arr[num].checked=true;
+        }else if(delta<0 && num<4){//向下滚动
+            num++;
+            arr[num].checked=true;
+        }
+    }
+</script>
+
+      <link rel="stylesheet" href="css/normalize.min.css">
+      <link rel="stylesheet" href="creation/css/style.css">
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+document.body.style.overflow = "hidden";
+var $ = {};
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    var opt = {
+        particleAmount: 50,     //粒子个数
+        defaultSpeed: 0.8,        //粒子运动速度
+        variantSpeed: 1,        //粒子运动速度的变量
+        particleColor: 'hsl(' + 360 * Math.random() + ', 100%, 60%)',       //粒子的颜色
+        lineColor:'hsl(' + 360 * Math.random() + ', 320%, 60%)',            //网格连线的颜色
+        defaultRadius: 2,           //粒子半径
+        variantRadius: 2,           //粒子半径的变量
+        minDistance: 200            //粒子之间连线的最小距离
+    };
+    var line = opt.lineColor.match(/\d+/g);
+    console.log(line);
+    var particle = [], w,h;
+    var delay = 200,tid;
+    init();
+    window.addEventListener("resize",function(){
+        winResize()
+    },false);
+
+    function winResize(){
+        clearTimeout(tid);
+        tid = setTimeout(function(){
+            getSize();
+        },delay)
+    }
+
+    function init(){
+        getSize();
+        for(let i = 0;i<opt.particleAmount; i++){
+            particle.push(new Partical());
+        }
+        loop();
+    }
+
+    function loop(){
+        ctx.clearRect(0,0,w,h);
+        for(let i = 0;i<particle.length; i++){
+            particle[i].update();
+            particle[i].draw();
+        }
+        for(let i = 0;i<particle.length; i++){
+            linePoint(particle[i],particle)
+        }
+        window.requestAnimationFrame(loop);
+    }
+
+    function linePoint(point,hub){
+        for(let i = 0;i<hub.length;i++){
+            let distance = getDistance(point,hub[i]);
+            let opacity = 1 -distance/opt.minDistance;
+            if(opacity > 0){
+                ctx.lineWidth = 0.5;
+                ctx.strokeStyle = "rgba("+line[0]+","+line[1]+","+line[2]+","+opacity+")";
+                ctx.beginPath();
+                ctx.moveTo(point.x,point.y);
+                ctx.lineTo(hub[i].x,hub[i].y);
+                ctx.closePath();
+                ctx.stroke();
+            }
+        }
+    }
+
+    function getDistance(point1,point2){
+        return Math.sqrt(Math.pow(point1.x-point2.x,2) + Math.pow(point1.y - point2.y ,2));
+    }
+
+    function getSize(){
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+    }
+    function Partical(){
+        this.x = Math.random()*w;           //粒子的x轴坐标
+        this.y = Math.random()*h;           //粒子的y轴坐标
+        this.speed = opt.defaultSpeed + opt.variantSpeed*Math.random();     //粒子的运动速度
+        this.directionAngle = Math.floor(Math.random()*360);                //粒子运动的方向
+        this.color = opt.particleColor ;                                    //粒子的颜色
+        this.radius = opt.defaultRadius+Math.random()*opt.variantRadius;    //粒子的半径大小
+        this.vector = {
+            x:this.speed * Math.cos(this.directionAngle),       //粒子在x轴的速度
+            y:this.speed * Math.sin(this.directionAngle)        //粒子在y轴的速度
+        }
+        this.update = function(){                   //粒子的更新函数
+            this.border();                           //判断粒子是否到了边界
+            this.x += this.vector.x;                //粒子下一时刻在x轴的坐标
+            this.y += this.vector.y;                //粒子下一时刻在y轴的坐标
+        }
+        this.border = function(){               //判断粒子是都到达边界
+            if(this.x >= w || this.x<= 0){      //如果到达左右边界，就让x轴的速度变为原来的负数
+                this.vector.x *= -1;
+            }
+            if(this.y >= h || this.y <= 0){     //如果到达上下边界，就让y轴的速度变为原来的负数
+                this.vector.y *= -1;
+            }
+            if(this.x > w){                     //下面是改变浏览器窗口大小时的操作，改变窗口大小后有的粒子会被隐藏，让他显示出来即可
+                this.x = w;
+            }
+            if(this.y > h){
+                this.y = h;
+            }
+            if(this.x < 0){
+                this.x = 0;
+            }
+            if(this.y < 0){
+                this.y = 0;
+            }
+        }
+        this.draw = function(){                 //绘制粒子的函数
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius ,0 ,Math.PI * 2);
+            ctx.closePath();
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+    }
+</script>
+<body>
+            
+<div class="container">
+    <div class="nav">
+        <input type="radio" name="radio-set" checked id="nav1">
+        <input type="radio" name="radio-set" id="nav2">
+    <div class="scroll">
+        <section class="panel" id="panel1">
+
+
+<div id="gradient">
+<box2 style="font-size:64px">VertexStudio</box2>
+</div>
+	<button id="button" ><a href="https://jq.qq.com/?_wv=1027&k=glGHx14l" target="_blank" class="white" >现在加入</a></button>
+		<a class="white_B" href="#panel2">▼ 创作小站</a>
+        </section>
+        <section class="panel panelColor" id="panel2">
+            <br />
+	    <br />
+	    <br />
+            <br />
+	    <!--<iframe frameborder=0 width=100% height=100% scrolling=auto src="creation/creation.html"></iframe>-->
+	      <ul class="honeycomb" lang="cn">
+  <li class="honeycomb-cell">
+     
+    <img class="honeycomb-cell__image" src="creation/images/download.png">
+    <div class="honeycomb-cell__title"><a href="res/index.html" class="link">下载站</a></div>
+  </li>
+  <li class="honeycomb-cell">
+    <img class="honeycomb-cell__image" src="creation/images/docs.png">
+	  <div class="honeycomb-cell__title"><a href="docs/index.html" class="link">文档</a></div>
+  </li>
+  <li class="honeycomb-cell">
+    <img class="honeycomb-cell__image" src="creation/images/github.png">
+	  <div class="honeycomb-cell__title"><a href="https://github.com/EnderMo" target="_blank" class="link">GitHub</a></div>
+  </li>
+  <li class="honeycomb-cell">
+    <img class="honeycomb-cell__image" src="creation/images/contribute.png">
+	  <div class="honeycomb-cell__title"><a href="https://afdian.net/@EnderMo" target="_blank" class="link">捐助</a></div>
+  </li>
+  <li class="honeycomb-cell">
+    <img class="honeycomb-cell__image" src="creation/images/bili.png">
+	  <div class="honeycomb-cell__title"><a href="https://space.bilibili.com/373454723" target="_blank" class="link">bilibili</a></div>
+  </li>
+  <li class="honeycomb-cell honeycomb__placeholder"></li>
+</ul>
+  
+
+        </section>
+ 
+    </div>
+    </div>
+</div>
+ <div class="top">
+                   <center> 
+                    <ul>
+                    <li><a href="">主站</a></li>
+						
+			    <ri><a href="docs/index.html">查看docs</a></ri>
+						<li>
+						<a href="#">传送门</a>
+						<ul>
+						<li><a href="https://api.endermo.xyz/" style="color:#ec4e6e;">API入口</a></li>
+						</ul>       
+                      </ul>
+                    </center> 
+            </div>           
+</body>
+</html>
