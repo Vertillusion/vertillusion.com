@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="UTF-8">
     <title>VertexStudio</title>
 	<meta name="keywords" content="VertexStudio"/>
@@ -32,11 +33,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 box2 {
+overflow: hidden;
 position: absolute;
-left: 50%;
-top: 50%;
+left: 400px;
+top: 40%;
+font-size:64px;
+float:left;
 /* 设置元素的相对于自身的偏移度为负50%(也就是元素自身尺寸的一半)*/
 transform: translate(-50%, -50%);
+}
+@media (max-width: 1000px){
+box2{
+left: 34%;
+font-size: 50px;
+
 }
 @keyframes fade-in {  
     0% {opacity: 0;}/*过渡状态 透明度为0*/  
@@ -64,6 +74,7 @@ transform: translate(-50%, -50%);
 !function (e, t, a) {function r() {for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");requestAnimationFrame(r)}function n() {var t = "function" == typeof e.onclick && e.onclick;e.onclick = function (e) {t && t(), o(e)}}function o(e) {var a = t.createElement("div");a.className = "heart", s.push({el: a,x: e.clientX - 5,y: e.clientY - 5,scale: 1,alpha: 1,color: c()}), t.body.appendChild(a)}function i(e) {var a = t.createElement("style");a.type = "text/css";try {a.appendChild(t.createTextNode(e))} catch (t) {a.styleSheet.cssText = e}t.getElementsByTagName("head")[0].appendChild(a)}function c() {return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"}var s = [];e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {setTimeout(e, 1e3 / 60)}, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()}(window, document);
  
 </script>
+
 <style>
 	
 .white{
@@ -85,10 +96,10 @@ transform: translate(-50%, -50%);
 		font-size: 1.5em;
 		text-transform: uppercase;
 		padding: 7px 20px;
-		left: 50%;
+		left: 230px;
 		width: 200px;
 		margin-left: -100px;
-		top: 60%;
+		top: 50%;
 		border-radius: 10px;
 		color: white;
 		text-shadow: -1px -1px 1px rgba(0,0,0,0.8);
@@ -120,7 +131,7 @@ transform: translate(-50%, -50%);
 		} 
 	}
 #gradient{animation:change 20s infinite;font-weight:100; font-family:Arial,Verdana,Sans-serif,HelveticaNeue LT 33 ThinEx; -webkit-font-family:Arial,Verdana,Sans-serif,HelveticaNeue LT 33 ThinEx }
-@keyframes change{0%{color:#5cb85c;}10%{color:#556bd8;}20%{color:#F44336;}30%{color:#66e616;}40% {color:#67bd31;}50%{color:#FF8E37;}60%{color:#1488F4;}70%{color:#87C540;}80%{color:#33FF8A;}90%{color:#FEFEFE;}100%{color:#5cb85c;}}
+@keyframes change{0%{color:#5cb85c;}10%{color:#FEFEFE;}20%{color:#F44336;}30%{color:#66e616;}40% {color:#67bd31;}50%{color:#FEFEFE;}60%{color:#1488F4;}70%{color:#87C540;}80%{color:#33FF8A;}90%{color:#FEFEFE;}100%{color:#5cb85c;}}
 </style>
        <style type="text/css">
         .top{
@@ -221,273 +232,66 @@ input{
 	       }
 </style>
 <style>
-#nav1,#nav1 + a{
-    left:0%;
-}
-#nav2,#nav2 + a{
-    left:20%;
-}
-#nav3,#nav3 + a{
-    left:50%;
-}
-#nav4,#nav4 + a{
-    left:60%;
-}
-#nav5,#nav5 + a{
-    left:80%;
-}
-.scroll,.panel{
-    width:100%;
-    height:100%;
-    position:relative;
-    text-align:center;
-}
-.scroll{
-    left:0;
-    top:0;
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-    -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transition: all 0.6s ease-in-out;
-    -moz-transition: all 0.6s ease-in-out;
-    -o-transition: all 0.6s ease-in-out;
-    transition: all 0.6s ease-in-out;
-    color:#e23a6e;
-    font-weight:bold;
-}
-/*动画*/
-#nav1:checked ~ .scroll #panel1 h1{
-    -webkit-animation: moveDown 0.6s ease-in-out 0.2s backwards;
-    -o-animation: moveDown 0.6s ease-in-out 0.2s backwards;
-    animation: moveDown 0.6s ease-in-out 0.2s backwards;
-}
-#nav2:checked ~ .scroll #panel2 h1{
-    -webkit-animation: moveDown 0.6s ease-in-out 0.2s backwards;
-    -o-animation: moveDown 0.6s ease-in-out 0.2s backwards;
-    animation: moveDown 0.6s ease-in-out 0.2s backwards;
-}
-#nav3:checked ~ .scroll #panel3 h1{
-    -webkit-animation: moveDown 0.6s ease-in-out 0.2s backwards;
-    -o-animation: moveDown 0.6s ease-in-out 0.2s backwards;
-    animation: moveDown 0.6s ease-in-out 0.2s backwards;
-}
-#nav4:checked ~ .scroll #panel4 h1{
-    -webkit-animation: moveDown 0.6s ease-in-out 0.2s backwards;
-    -o-animation: moveDown 0.6s ease-in-out 0.2s backwards;
-    animation: moveDown 0.6s ease-in-out 0.2s backwards;
-}
-#nav5:checked ~ .scroll #panel5 h1{
-    -webkit-animation: moveDown 0.6s ease-in-out 0.2s backwards;
-    -o-animation: moveDown 0.6s ease-in-out 0.2s backwards;
-    animation: moveDown 0.6s ease-in-out 0.2s backwards;
-}
-@keyframes moveDown {
-    0%{
-        -webkit-transform: translateY(-40px);
-        -moz-transform: translateY(-40px);
-        -ms-transform: translateY(-40px);
-        -o-transform: translateY(-40px);
-        transform: translateY(-40px);
-        opacity:0;
-    }
-    100%{
-        -webkit-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -o-transform: translateY(0);
-        transform: translateY(0);
-        opacity:1;
-    }
-}
-.panel p{
-    color:#000;
-}
-#nav1:checked ~ .scroll{
-     -webkit-transform: translateY(0%);
-     -moz-transform: translateY(0%);
-     -ms-transform: translateY(0%);
-     -o-transform: translateY(0%);
-     transform: translateY(0%);
- }
-#nav2:checked ~ .scroll{
-    -webkit-transform: translateY(-100%);
-    -moz-transform: translateY(-100%);
-    -ms-transform: translateY(-100%);
-    -o-transform: translateY(-100%);
-    transform: translateY(-100%);
-}
-#nav3:checked ~ .scroll{
-    -webkit-transform: translateY(-200%);
-    -moz-transform: translateY(-200%);
-    -ms-transform: translateY(-200%);
-    -o-transform: translateY(-200%);
-    transform: translateY(-200%);
-}
-#nav4:checked ~ .scroll{
-    -webkit-transform: translateY(-300%);
-    -moz-transform: translateY(-300%);
-    -ms-transform: translateY(-300%);
-    -o-transform: translateY(-300%);
-    transform: translateY(-300%);
-}
-#nav5:checked ~ .scroll{
-    -webkit-transform: translateY(-400%);
-    -moz-transform: translateY(-400%);
-    -ms-transform: translateY(-400%);
-    -o-transform: translateY(-400%);
-    transform: translateY(-400%);
-}
-.icon{
-    width:200px;
-    height:200px;
-    background:#fa96b5;
-    -webkit-transform:translateY(-50%) rotate(45deg);
-    -moz-transform:translateY(-50%) rotate(45deg);
-    -ms-transform:translateY(-50%) rotate(45deg);
-    -o-transform:translateY(-50%) rotate(45deg);
-    transform:translateY(-50%) rotate(45deg);
-    position:absolute;
-    left:50%;
-    top:0;
-    margin-left:-100px;
-}
-[data-icon]:after{
-    content:attr(data-icon);
-    width:200px;
-    height:200px;
-    color:#fff;
-    font-size:90px;
-    text-align:center;
-    line-height:200px;
-    position:absolute;
-    left:18%;
-    top:18%;
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-}
-</style>
-<script>
-    window.onload= function () {
-        var scroll=document.getElementsByClassName("scroll")[0];//ie不兼容，换成id会成功
-        var panel=document.getElementsByClassName("panel");//ie不兼容，换成id会成功
- 
-        var clientH=window.innerHeight;
-        scroll.style.height=clientH+"px";
-        for(var i=0;i<panel.length;i++){
-            panel[i].style.height=clientH+"px";
-        }
-        /*下面是关于鼠标滚动*/
-        var inputC=document.getElementsByTagName("input");
-        var wheel= function (event) {
-            var delta=0;
-            if(!event)//for ie
-                event=window.event;
-            if(event.wheelDelta){//ie,opera
-                delta=event.wheelDelta/120;
-            }else if(event.detail){
-                delta=-event.detail/3;
-            }
-            if(delta){
-                handle(delta,inputC);
-            }
-            if(event.preventDefault)
-                event.preventDefault();
-            event.returnValue=false;
-        };
-        if(window.addEventListener){
-            window.addEventListener('DOMMouseScroll',wheel,false);
-        }
-        window.onmousewheel=wheel;
-    };
-    function handle(delta,arr) {
-        var num;
-        for(var i=0;i<arr.length;i++){//得到当前checked元素的下标
-            if(arr[i].checked){
-                num=i;
-            }
-        }
-        if(delta>0 && num>0){//向上滚动
-            num--;
-            arr[num].checked=true;
-        }else if(delta<0 && num<4){//向下滚动
-            num++;
-            arr[num].checked=true;
-        }
-    }
-</script>
 
-      <link rel="stylesheet" href="css/normalize.min.css">
-      <link rel="stylesheet" href="creation/css/style.css">
+	.boxframe{
+		backdrop-filter:blur(10px);
+		position: absolute;
+		width:30%;
+		height:60%;
+		padding: 20px; 
+		border-radius: 20px;
+		background:rgba(244,244,244,0.1);
+	    top:50%;
+		right:0%;
+		transform: translate(-10%, -50%);
+	}
+	.boxIframe{
+		/*backdrop-filter:blur(0px);*/
+		position: relative;
+		font-size: 100%;
+		color:rgba(244,244,244,1);
+		width:100%;
+		height:10%;
+		vertical-align:middle; 
+		line-height:10%; 
+		padding: 20px; 
+		border-radius: 10px;
+		background:rgba(244,244,244,0.1);
+		top:8px;
+		margin-top:10px;
+	    /*top:50%;
+		right:0%;
+		transform: translate(-10%, -50%);*/
+	}
+</style>
+
+
+<link rel="stylesheet" href="css/normalize.min.css">
+<link rel="stylesheet" href="creation/css/style.css">
+
 </head>
 <body>
-<canvas id="canvas"></canvas>
+
 <script>
 document.body.style.overflow = "hidden";
 
 </script>
+
 	<style>
 body{background: url(image/bg.png) no-repeat;background-size:cover;background-attachment:fixed;}
 </style>
 <body>
-            
-<div class="container">
-    <div class="nav">
-        <input type="radio" name="radio-set" checked id="nav1">
-        <input type="radio" name="radio-set" id="nav2">
-    <div class="scroll">
-        <section class="panel" id="panel1">
 
-
-<div id="gradient">
-<box2 style="font-size:64px">VertexStudio</box2>
+<div>
+    <div id="gradient">
+    <box2 style="">"Vertex , 连线成梦"</box2>
+    </div>
 </div>
-	<button id="button" ><a href="https://jq.qq.com/?_wv=1027&k=glGHx14l" target="_blank" class="white" >现在加入</a></button>
-		<a class="white_B" href="#panel2">▼ 创作小站</a>
-        </section>
-        <section class="panel panelColor" id="panel2">
-            <br />
-	    <br />
-	    <br />
-            <br />
-	    <!--<iframe frameborder=0 width=100% height=100% scrolling=auto src="creation/creation.html"></iframe>-->
-	      <ul class="honeycomb" lang="cn">
-  <li class="honeycomb-cell">
-     
-    <img class="honeycomb-cell__image" src="creation/images/download.png">
-    <div class="honeycomb-cell__title"><a href="res/index.html" class="link">下载站</a></div>
-  </li>
-  <li class="honeycomb-cell">
-    <img class="honeycomb-cell__image" src="creation/images/docs.png">
-	  <div class="honeycomb-cell__title"><a href="docs/index.html" class="link">文档</a></div>
-  </li>
-  <li class="honeycomb-cell">
-    <img class="honeycomb-cell__image" src="creation/images/github.png">
-	  <div class="honeycomb-cell__title"><a href="https://github.com/EnderMo" target="_blank" class="link">GitHub</a></div>
-  </li>
-  <li class="honeycomb-cell">
-    <img class="honeycomb-cell__image" src="creation/images/contribute.png">
-	  <div class="honeycomb-cell__title"><a href="https://afdian.net/@EnderMo" target="_blank" class="link">捐助</a></div>
-  </li>
-  <li class="honeycomb-cell">
-    <img class="honeycomb-cell__image" src="creation/images/bili.png">
-	  <div class="honeycomb-cell__title"><a href="https://space.bilibili.com/373454723" target="_blank" class="link">bilibili</a></div>
-  </li>
-  <li class="honeycomb-cell honeycomb__placeholder"></li>
-</ul>
-  
-
-        </section>
- 
-    </div>
-    </div>
+<div>
+	<button id="button" ><a href="https://jq.qq.com/?_wv=1027&k=glGHx14l" target="_blank" class="white" >现在加入</a></button></div>
+<div class="boxframe">
+	<div class="boxIframe">文字</div>
+	<div class="boxIframe">还是文字</div>
 </div>
  <div class="top">
                    <center> 
@@ -496,15 +300,16 @@ body{background: url(image/bg.png) no-repeat;background-size:cover;background-at
 	            <li><a href="">VertexStudio</a></li>
                     <li><a href="">主站</a></li>
 						
-			    <ri><a href="docs/index.html">查看docs</a></ri>
+			    <ri><a href="docs/index.html">查看文档</a></ri>
 						<li>
 						<a href="#">传送门</a>
 						<ul>
-						<li><a href="https://api.endermo.xyz/" style="color:#ec4e6e;">API入口</a></li>
+						<li><a href="https://me.vertexstudio.xyz/" style="color:#4D9FEC;">创作站</a></li>
+						<li><a href="https://cm.vertexstudio.xyz/" style="color:#ec4e6e;">MC-Curve</a></li>
 						</ul>       
                       </ul>
                     </center> 
-            </div>           
+            </div>  
 </body>
 </html>
 
