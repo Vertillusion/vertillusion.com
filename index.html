@@ -46,7 +46,6 @@ transform: translate(-50%, -50%);
 box2{
 left: 34%;
 font-size: 50px;
-
 }
 @keyframes fade-in {  
     0% {opacity: 0;}/*过渡状态 透明度为0*/  
@@ -130,8 +129,8 @@ font-size: 50px;
 			margin-top: 6px; 
 		} 
 	}
-#gradient{animation:change 20s infinite;font-weight:100; font-family:Arial,Verdana,Sans-serif,HelveticaNeue LT 33 ThinEx; -webkit-font-family:Arial,Verdana,Sans-serif,HelveticaNeue LT 33 ThinEx }
-@keyframes change{0%{color:#5cb85c;}10%{color:#FEFEFE;}20%{color:#F44336;}30%{color:#66e616;}40% {color:#67bd31;}50%{color:#FEFEFE;}60%{color:#1488F4;}70%{color:#87C540;}80%{color:#33FF8A;}90%{color:#FEFEFE;}100%{color:#5cb85c;}}
+#gradient{animation:change 5s infinite;font-weight:100;  font-family:Arial,Verdana,Sans-serif,HelveticaNeue LT 33 ThinEx; -webkit-font-family:Arial,Verdana,Sans-serif,HelveticaNeue LT 33 ThinEx }
+@keyframes change{0%{color:#FFFFFF;}50%{color:#D0D0D0;}100%{color:#FFFFFF;}}
 </style>
        <style type="text/css">
         .top{
@@ -139,12 +138,12 @@ font-size: 50px;
     height: auto; /*高度改为自动高度*/
     width:100%;
     margin-left: 0;
-    background:rgba(37,42,51,0.0);
+    background:rgba(244,244,244,0.2);
     position: fixed; /*固定在顶部*/
     left:0;
     top: 0;/*离顶部的距离为0*/
     margin-bottom: 5px;
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(4px);
 }
 .top ul{
     /* 清除ul标签的默认样式 */
@@ -182,7 +181,8 @@ font-size: 50px;
 .top ul li ul{
     /* 设置二级菜单 */
     margin-left: -0.2px;
-    background:rgba(60,60,60,1.00);
+    border-radius: 15px;
+    background:rgba(60,60,60,0.7);
     position: relative;
     display: none; /* 默认隐藏二级菜单的内容 */
 
@@ -278,7 +278,7 @@ document.body.style.overflow = "hidden";
 </script>
 
 	<style>
-body{background: url(image/bg.png) no-repeat;background-size:cover;background-attachment:fixed;}
+body{background: url(image/LitNight.png) no-repeat;background-size:cover;background-attachment:fixed;}
 </style>
 <body>
 
