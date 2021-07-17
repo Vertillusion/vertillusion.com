@@ -13,7 +13,7 @@ function star(x, y,) {
 	this.pathLength = undefined;			//轨道长度
 	this.temp = 1;			//用于计算新位置的自增的数字
 	this.distenceToCenter=0;
-	this.radiu = 5;		//半径
+	this.radiu = 1;		//半径
 	this.color = { r: 255, g: 255, b: 255, a: 1 };
 	this.drawSelf = function a(ctx,center) {
 		//绘画本体
@@ -22,10 +22,15 @@ function star(x, y,) {
 		ctx.fillStyle =format("rgba({0},{1},{2},{3}",this.color.r.toString(),this.color.g.toString(),this.color.b.toString(),this.color.a.toString());
 		ctx.closePath();
 		ctx.fill();
+		//绘制星轨
+
+		
+		
 		//移动
 
 		
-		this.temp+=0.007;
+		//this.temp+=this.distenceToCenter*0.00007
+		this.temp+=0.001
 		this.posizition.x=center.x+Math.cos(this.temp)*this.distenceToCenter;
 		this.posizition.y=center.y+Math.sin(this.temp)*this.distenceToCenter;
 	}
@@ -40,9 +45,10 @@ ctx = canvas_dom.getContext("2d");
 star_array = [];
 
 //开始随机生成星星QWQ
-var StatNumber = 50;			//这里就是星星的数量啦qwq，小末哥哥有需要的话可以改哦
-for (var t = 0; t < 100; t++) {
+var StatNumber = 1000;			//这里就是星星的数量啦qwq，小末哥哥有需要的话可以改哦
+for (var t = 0; t < StatNumber; t++) {
 	var temp = new star(randomFrom(0, canvas_dom.width), randomFrom(0, canvas_dom.height));
+	temp.temp=randomFrom(-1000,1000)
 	temp.distenceToCenter=(Math.sqrt((temp.posizition.x - center_point.x) *(temp.posizition.x - center_point.x)  + (temp.posizition.y - center_point.y) *(temp.posizition.y - center_point.y)));
 	temp.pathLength=temp.distenceToCenter*2;
 	star_array.push(temp);
