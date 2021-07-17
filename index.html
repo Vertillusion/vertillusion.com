@@ -1,317 +1,67 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-
-    <meta charset="UTF-8">
-    <title>VertexStudio</title>
-	<meta name="keywords" content="VertexStudio"/>
-		<meta name="description" content="VertexStudio的创作小站 qwq"/>
-	   	<link rel="icon" href="image/LOGO.png"/>
-<style>
-@keyframes scaleDraw {  /*定义关键帧、scaleDrew是需要绑定到选择器的关键帧名称*/
-            0%{
-                transform: scale(1);  /*开始为原始大小*/
-            }
-            25%{
-                transform: scale(1.1); /*放大1.1倍*/
-            }
-            50%{
-                transform: scale(1);
-            }
-            75%{
-                transform: scale(1.1);
-            }
-        }
-
- ul li ul {
-  position: relative;
-  min-height: 5%;
-  font-family: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
-  font-size: 17px;
-  line-height: 4;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-box2 {
-overflow: hidden;
-position: absolute;
-left: 400px;
-top: 40%;
-font-size:64px;
-float:left;
-/* 设置元素的相对于自身的偏移度为负50%(也就是元素自身尺寸的一半)*/
-transform: translate(-50%, -50%);
-}
-@media (max-width: 1000px){
-box2{
-left: 34%;
-font-size: 50px;
-}
-@keyframes fade-in {  
-    0% {opacity: 0;}/*过渡状态 透明度为0*/  
-    40% {opacity: 0;}/*过渡状态 透明度为0*/  
-    100% {opacity: 1;}/*结束状态 透明度为1*/  
-}  
-@-webkit-keyframes fade-in {/*针对webkit内核*/
-    0% {opacity: 0;}/*过渡状态 透明度为0*/  
-    40% {opacity: 0;}  
-    100% {opacity: 1;}  
-}  
-@keyframes move-appear{
-	from{
-		transform: translate(0,-10%);
-		opacity: 0;
-	}
-	to{
-		transform: translate(0,0);
-		opacity: 1;
-	}
-}
-</style>
-	<script type="text/javascript"> 
- 
-!function (e, t, a) {function r() {for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");requestAnimationFrame(r)}function n() {var t = "function" == typeof e.onclick && e.onclick;e.onclick = function (e) {t && t(), o(e)}}function o(e) {var a = t.createElement("div");a.className = "heart", s.push({el: a,x: e.clientX - 5,y: e.clientY - 5,scale: 1,alpha: 1,color: c()}), t.body.appendChild(a)}function i(e) {var a = t.createElement("style");a.type = "text/css";try {a.appendChild(t.createTextNode(e))} catch (t) {a.styleSheet.cssText = e}t.getElementsByTagName("head")[0].appendChild(a)}function c() {return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"}var s = [];e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {setTimeout(e, 1e3 / 60)}, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()}(window, document);
- 
-</script>
-
-<style>
-	
-.white{
-	-webkit-text-decoration: none;
-	text-decoration: none;
-	color:#fff;
-	}
-.white_B{
-	-webkit-text-decoration: none;
-	text-decoration: none;
-	position: absolute;
-	bottom:40px;
-	left:47.5%;
-	color:#fff;
-	}
-#button {
-		font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
-		position: absolute;
-		font-size: 1.5em;
-		text-transform: uppercase;
-		padding: 7px 20px;
-		left: 230px;
-		width: 200px;
-		margin-left: -100px;
-		top: 50%;
-		border-radius: 10px;
-		color: white;
-		text-shadow: -1px -1px 1px rgba(0,0,0,0.8);
-		border: 5px solid transparent;
-		border-bottom-color: rgba(0,0,0,0.35);
-		background: hsla(260, 100%, 50%, 1);
-		cursor: pointer;
--webkit-text-decoration: none;
-	text-decoration: none;
-		animation: pulse 1s infinite alternate;
-		transition: background 0.4s, border 0.2s, margin 0.2s;
-	}
-	#button:hover {
-		background: hsla(220, 100%, 60%, 1);
-		margin-top: -1px;
-
-		animation: none;
-	}
-	#button:active {
-		border-bottom-width: 0;
-		margin-top: 5px;
-	}
-	@keyframes pulse {
-		0% {
-			margin-top: 0px;
-		}
-		100% {
-			margin-top: 6px; 
-		} 
-	}
-#gradient{animation:change 5s infinite;font-weight:100;  font-family:Arial,Verdana,Sans-serif,HelveticaNeue LT 33 ThinEx; -webkit-font-family:Arial,Verdana,Sans-serif,HelveticaNeue LT 33 ThinEx }
-@keyframes change{0%{color:#FFFFFF;}50%{color:#D0D0D0;}100%{color:#FFFFFF;}}
-</style>
-       <style type="text/css">
-        .top{
-    /* 设置宽度高度背景颜色 */
-    height: auto; /*高度改为自动高度*/
-    width:100%;
-    margin-left: 0;
-    background:rgba(244,244,244,0.2);
-    position: fixed; /*固定在顶部*/
-    left:0;
-    top: 0;/*离顶部的距离为0*/
-    margin-bottom: 5px;
-    backdrop-filter:blur(4px);
-}
-.top ul{
-    /* 清除ul标签的默认样式 */
-    width: auto;/*宽度也改为自动*/
-    list-style-type: none;
-    white-space:nowrap;
-    overflow: hidden;
-    margin-left: 12%;
-    /* margin-top: 0;          */
-    padding: 0;
-
-}
-.top li {
-    float:left; /* 使li内容横向浮动，即横向排列  */
-    margin-right:2%;  /* 两个li之间的距离*/
-    position: relative;
-    overflow: hidden;
-}
-
-.top li a{
-   /* 设置链接内容显示的格式*/
-    display: block; /* 把链接显示为块元素可使整个链接区域可点击 */
-    color:white;
-    text-align: center;
-    padding: 3px;
-    overflow: hidden;
-    text-decoration: none; /* 去除下划线 */
-    
-}
-.top li a:hover{
-    /*background-color: #111;*/
-    -webkit-animation: scaleDraw 5s ease-in-out infinite;
-}
-.top ul li ul{
-    /* 设置二级菜单 */
-    margin-left: -0.2px;
-    border-radius: 15px;
-    background:rgba(60,60,60,0.7);
-    position: relative;
-    display: none; /* 默认隐藏二级菜单的内容 */
-
-}
-.top ul li ul li{
-    /* 二级菜单li内容的显示 */
-    
-    float:none;
-    text-align: center;
-}
-.top ul li:hover ul{
-    /* 鼠标选中二级菜单内容时 */
-    animation: fade-in;/*动画名称*/  
-    animation-duration: 0.6s;/*动画持续时间*/  
-    -webkit-animation:fade-in 0.6s;/*针对webkit内核*/  
-    display: block;
-}
-.top ri {
-    float:right; /* 使li内容横向浮动，即横向排列  */
-    margin-right:13.5%;  /* 两个li之间的距离*/
-    position: relative;
-    overflow: hidden;
-}
-
-.top ri a{
-   /* 设置链接内容显示的格式*/
-    display: block;  /*把链接显示为块元素可使整个链接区域可点击 */
-    color:white;
-    text-align: center;
-    padding: 3px;
-    overflow: hidden;
-    text-decoration: none; /* 去除下划线 */
-    
-}
-.top ri a:hover{
-        -webkit-animation: scaleDraw 5s ease-in-out infinite;
-}
-
-body{
-    background:#494A5F;
-    /* 这里是颜色设定啦！QwQ还原色#eff3f5 */
-}
-input{
-	overflow:hidden;
-	width:0;
-	height:0;
-	       }
-</style>
-<style>
-
-	.boxframe{
-		backdrop-filter:blur(10px);
-		position: absolute;
-		width:30%;
-		height:60%;
-		padding: 20px; 
-		border-radius: 20px;
-		background:rgba(244,244,244,0.1);
-	    top:50%;
-		right:0%;
-		transform: translate(-10%, -50%);
-	}
-	.boxIframe{
-		/*backdrop-filter:blur(0px);*/
-                             display: block; 
-		position: relative;
-		font-size: 20px;
-		color:rgba(244,244,244,1);
-		width:100%;
-		height:10% + 2;
-		vertical-align:middle; 
-		line-height:80%; 
-		padding: 20px; 
-		border-radius: 10px;
-		background:rgba(244,244,244,0.1);
-		top:8px;
-		margin-top:10px;
-	    /*top:50%;
-		right:0%;
-		transform: translate(-10%, -50%);*/
-	}
-</style>
-
-
-<link rel="stylesheet" href="css/normalize.min.css">
-<link rel="stylesheet" href="creation/css/style.css">
+	<meta charset="UTF-8" />
+	<title>VertexStudio</title>
+	<meta name="keywords" content="VertexStudio" />
+	<meta name="description" content="VertexStudio的创作小站 qwq" />
+	<link rel="icon" href="image/LOGO.png" />
+	<link rel="stylesheet" href="style/style.css" />
+	<script type="text/javascript" src="js/load.js"></script>
+	<link rel="stylesheet" href="css/normalize.min.css" />
+	<link rel="stylesheet" href="creation/css/style.css" />
 
 </head>
-<body>
 
-<script>
-document.body.style.overflow = "hidden";
-
-</script>
-
-	<style>
-body{background: url(image/LitNight.png) no-repeat;background-size:cover;background-attachment:fixed;}
-</style>
-<body>
-
-<div>
-    <div id="gradient">
-    <box2 style="">"Vertex , 连线成梦"</box2>
-    </div>
+<body></body>
+<div id="canvas_container" style="height: 100%; width: 100%;">
+	<canvas id="background_drewer"></canvas>
 </div>
-<div>
-	<button id="button" ><a href="https://jq.qq.com/?_wv=1027&k=glGHx14l" target="_blank" class="white" >现在加入</a></button></div>
+<img src="/image/LitNight_mount.png" alt="" style="object-fit: cover;overflow: hidden;">
+<div id="gradient">"Vertex , 连线成梦"</div>
+<button id="button">
+	<a href="https://jq.qq.com/?_wv=1027&k=glGHx14l" target="_blank" class="white">现在加入</a>
+</button>
+</div>
 <div class="boxframe">
-	<div class="boxIframe"><a href="https://me.vertexstudio.xyz">创作站</a></div>
-               <div class="boxIframe"><a href="https://space.bilibili.com/373454723" target="_blank">bilibili</a></div>
-               <div class="boxIframe"><a href="https://github.com/EnderMo" target="_blank">GitHub</a></div>
-	<div class="boxIframe"><a href="https://afdian.net/@EnderMo" target="_blank">捐助</a></div>
+	<div class="boxIframe">
+		<a href="https://me.vertexstudio.xyz">创作站</a>
+	</div>
+	<div class="boxIframe">
+		<a href="https://space.bilibili.com/373454723" target="_blank">bilibili</a>
+	</div>
+	<div class="boxIframe">
+		<a href="https://github.com/EnderMo" target="_blank">GitHub</a>
+	</div>
+	<div class="boxIframe">
+		<a href="https://afdian.net/@EnderMo" target="_blank">捐助</a>
+	</div>
 </div>
- <div class="top">
-                   <center> 
-                    <ul>
-		    <li><img src="image/LOGO.png" width="32" height="32"/></li>
-	            <li><a href="">VertexStudio</a></li>
-                    <li><a href="">主站</a></li>
-						
-			    <ri><a href="docs/index.html">查看文档</a></ri>
-						<li>
-						<a href="#">传送门</a>
-						<ul>
-						<li><a href="https://me.vertexstudio.xyz/" style="color:#4D9FEC;">创作站</a></li>
-						<li><a href="https://cm.vertexstudio.xyz/" style="color:#ec4e6e;">MC-Curve</a></li>
-						</ul>       
-                      </ul>
-                    </center> 
-            </div>  
-</body>
-</html>
+<div class="top">
+	<center>
+		<ul>
+			<li><img src="image/LOGO.png" width="32" height="32" /></li>
+			<li><a href="">VertexStudio</a></li>
+			<li><a href="">主站</a></li>
 
+			<ri><a href="docs/index.html">查看文档</a></ri>
+			<li>
+				<a href="#">传送门</a>
+				<ul>
+					<li>
+						<a href="https://me.vertexstudio.xyz/" style="color: #4d9fec" ;>创作站</a>
+					</li>
+					<li>
+						<a href="https://cm.vertexstudio.xyz/"
+							style="color: #ec4e6e">MC-Curve</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</center>
+</div>
+<script type="text/javascript" src="js/background.js"></script>
+</body>
+
+</html>
