@@ -12,8 +12,6 @@ body {
 #canvas_container{
   position:absolute;
   z-index: -1;
-  
-  
 
 }
 body,html{

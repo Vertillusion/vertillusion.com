@@ -13,8 +13,8 @@ function star(x, y) {
 	this.pathLength = undefined; //轨道长度
 	this.temp = undefined; //用于计算新位置的自增的数字
 	this.distenceToCenter = 0;
-	this.radiu = 0.6114514; //星星半径
-	this.color = { r: 256, g: 256, b: 256};	//星星颜色	
+	this.radiu = 0.7114514; //星星半径
+	this.color = { r: 256, g: 256, b: 256 };	//星星颜色	
 	this.drawSelf = function a(ctx, center) {
 		//移动
 		//this.temp+=this.distenceToCenter*0.00007
@@ -55,7 +55,7 @@ ctx = canvas_dom.getContext("2d");
 star_array = []; //用于存储星星实体的数组
 
 //开始随机生成星星QWQ,从这开始就是初始化部分
-var StatNumber = 800; //这里就是星星的数量啦qwq，小末哥哥有需要的话可以改哦
+var StatNumber = 2000; //这里就是星星的数量啦qwq，小末哥哥有需要的话可以改哦
 for (var t = 0; t < StatNumber; t++) {
 	var temp = new star(
 		randomFrom(0, canvas_dom.width),
@@ -64,8 +64,8 @@ for (var t = 0; t < StatNumber; t++) {
 	);
 	temp.temp = randomFrom(-1000, 1000);//为了保证星星的位置不一样
 	temp.distenceToCenter = Math.sqrt(
-		(temp.posizition.x - center_point.x) **2+
-		(temp.posizition.y - center_point.y) **2
+		(temp.posizition.x - center_point.x) ** 2 +
+		(temp.posizition.y - center_point.y) ** 2
 	);//使用直角坐标系两点距离公式计算星星距离中心点的距离
 	star_array.push(temp);//将新的星星插♂入数组
 }
@@ -77,21 +77,15 @@ function update_frame() {
 	for (index in star_array) {
 		star_array[index].drawSelf(ctx, center_point);
 	}
-	ctx.globalCompositeOperation = 'destination-in';		//这个参数可以让下面的那个黑色透明蒙版只画在星星上面
-	ctx.fillStyle = "rgba(0,0,0,0.996)";			//这个数值调了好久，麻烦不要乱动
-	ctx.fillRect(0, 0, canvas_dom.width, canvas_dom.height)
-	ctx.globalCompositeOperation = 'source-over';
+	//降低上一帧的透明度值，叠加起来就是星轨的特效了
 	let image_data = ctx.getImageData(0, 0, canvas_dom.width, canvas_dom.height);
 	//遍历像素
-	let long=image_data.data.length;//提前取出长度
+	let long = image_data.data.length;//提前取出长度
 	for (var i = 0; i < long; i += 4) {
 		//i:r,i+1:g.i+2:b,i+3:alpha
-		if (image_data.data[i + 3] < 128) {			//这个128是个临界值，就刚刚可以把那些过长的星轨的像素选中
-			image_data.data[i] -= 2;			//rgb都自减，相当于降低灰度
-			image_data.data[i + 1] -= 2;
-			image_data.data[i + 2] -= 2;
-			if (image_data.data[i + 3] != 0) { image_data.data[i + 3]-- };			//alpha自减，直到alpha为0
-		}
+		if (image_data.data[i + 3] >=0) { 
+			image_data.data[i + 3]-=1.3;		//这个地方就是alpha值减少的速度，更改这个地方就可以更改星轨长度了
+		 };			//alpha自减，并防止减到负数
 	}
 	//把图像放回去
 	ctx.putImageData(image_data, 0, 0)
