@@ -14,6 +14,13 @@ body {
   z-index: -1;
 
 }
+#front-img{
+  width: 100%;
+  position: fixed;
+  overflow: hidden;
+  bottom: 0;
+  
+}
 body,html{
   height: 100%;
 }
@@ -22,7 +29,7 @@ body,html{
   /* 设置宽度高度背景颜色 */
   height: auto; /*高度改为自动高度*/
   width:100%;
-  margin-left: 0;
+  padding-top: 5px;
   background:rgba(244,244,244,0.2);
   position: fixed; /*固定在顶部*/
   left:0;
