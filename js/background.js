@@ -17,7 +17,6 @@ function star(x, y) {
 	this.color = { r: 255, g: 255, b: 255, a: 1 };
 	this.drawSelf = function a(ctx, center) {
 		//移动
-
 		//this.temp+=this.distenceToCenter*0.00007
 		this.temp += 0.001;
 		this.posizition.x = center.x + Math.cos(this.temp) * this.distenceToCenter;
@@ -41,8 +40,6 @@ function star(x, y) {
 		);
 		ctx.closePath();
 		ctx.fill();
-
-
 	};
 }
 //获取dom，更改一些东西
@@ -54,10 +51,11 @@ center_point = {
 	y: randomFrom(0, document.body.clientHeight),
 };
 ctx = canvas_dom.getContext("2d");
+ctx.clearRect(0,0,canvas_dom.width,canvas_dom.height)
 star_array = []; //用于存储星星实体的数组
 
 //开始随机生成星星QWQ
-var StatNumber = 1000; //这里就是星星的数量啦qwq，小末哥哥有需要的话可以改哦
+var StatNumber = 200; //这里就是星星的数量啦qwq，小末哥哥有需要的话可以改哦
 for (var t = 0; t < StatNumber; t++) {
 	var temp = new star(
 		randomFrom(0, canvas_dom.width),
@@ -73,22 +71,40 @@ for (var t = 0; t < StatNumber; t++) {
 	temp.pathLength = temp.distenceToCenter * 2;
 	star_array.push(temp);
 }
-
 function update_frame() {
 	//为了拖尾就不要清除画布了
 	//ctx.clearRect(0,0,canvas_dom.width,canvas_dom.height);
 
-
+	
 	for (index in star_array) {
 		star_array[index].drawSelf(ctx, center_point);
 	}
-	ctx.globalCompositeOperation='destination-in';
-	ctx.fillStyle="rgba(0,0,0,0.8)";
+	ctx.globalCompositeOperation='destination-in';		//这个参数可以让下面的那个黑色透明蒙版只画在星星上面
+	ctx.fillStyle="rgba(0,0,0,0.996)";			//这个数值调了好久，麻烦不要乱动
 	ctx.fillRect(0,0,canvas_dom.width,canvas_dom.height)
 	ctx.globalCompositeOperation='source-over';
+	
+	let image_data=ctx.getImageData(0,0,canvas_dom.width,canvas_dom.height);
+	//遍历像素
+	for(var i=0;i<image_data.data.length;i+=4){
+		//i:r,i+1:g.i+2:b,i+3:alpha
+			if(image_data.data[i+3]<128){			//这个128是个临界值，就刚刚可以把那些过长的星轨的像素选中
+				image_data.data[i]-=2;			//rgb都自减，相当于降低灰度
+				image_data.data[i+1]-=2;
+				image_data.data[i+2]-=2;
+				if(image_data.data[i+3]!=0){image_data.data[i+3]--};			//alpha自减，直到
+			}
+			//console.log("fuck")
+
+			//console.log(image_data[i+2])
+		}
+	//把图像放回去
+	ctx.putImageData(image_data,0,0)
+	//console.log(image_data);
+	
 
 
-	//setTimeout(	window.requestAnimationFrame,1,update_frame);
+	//setTimeout(	window.requestAnimationFrame,10,update_frame);
 	window.requestAnimationFrame(update_frame);
 }
 
