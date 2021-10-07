@@ -55,7 +55,7 @@ ctx = canvas_dom.getContext("2d");
 star_array = []; //用于存储星星实体的数组
 
 //开始随机生成星星QWQ,从这开始就是初始化部分
-var StatNumber = 100; //这里就是星星的数量啦qwq，小末哥哥有需要的话可以改哦 EnderMo Commented:是
+var StatNumber = 2000; //这里就是星星的数量啦qwq，小末哥哥有需要的话可以改哦
 for (var t = 0; t < StatNumber; t++) {
 	var temp = new star(
 		randomFrom(0, canvas_dom.width),
