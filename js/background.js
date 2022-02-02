@@ -52,14 +52,14 @@ function star(x, y) {
 	this.pathLength = undefined; //轨道长度
 	this.temp = undefined; //用于计算新位置的自增的数字
 	this.distenceToCenter = 0;
-	this.radiu = 0.7114514; //星星半径
+	this.radiu = 1.5; //星星半径
 	this.color = { r: 255, g: 255, b: 255 };	//星星颜色	在这定义没用的
 	this.drawSelf = function a(ctx, center) {
 		//移动
 		//this.temp+=this.distenceToCenter*0.00007
 
 		//先更新位置而不是先绘制是为了防止第一帧的闪屏
-		this.temp += 0.1;//自增~qwq
+		this.temp += 0.001;//自增~qwq
 		this.posizition.x = center.x + Math.cos(this.temp) * this.distenceToCenter;//通过公式计算圆周运动的下一个位置
 		this.posizition.y = center.y + Math.sin(this.temp) * this.distenceToCenter;
 		//绘画本体
@@ -98,7 +98,7 @@ ctx = canvas_dom.getContext("2d");
 star_array = []; //用于存储星星实体的数组
 
 //开始随机生成星星QWQ,从这开始就是初始化部分
-var StatNumber = 1500; //这里就是星星的数量啦qwq，小末哥哥有需要的话可以改哦
+var StatNumber = 1600; //这里就是星星的数量啦qwq，小末哥哥有需要的话可以改哦
 for (var t = 0; t < StatNumber; t++) {
 	var temp = new star(
 		randomFrom(0, canvas_dom.width),
@@ -133,7 +133,9 @@ function update_frame() {
 	for (var i = 0; i < long; i += 4) {
 		//i:r,i+1:g.i+2:b,i+3:alpha
 		if (image_data.data[i + 3] >=0) {
-			image_data.data[i + 3]-=1.4;		//这个地方就是alpha值减少的速度，更改这个地方就可以更改星轨长度了
+			if (image_data.data[i + 3]>100) image_data.data[i + 3] -= 1.5;		//这个地方就是alpha值减少的速度，更改这个地方就可以更改星轨长度了
+			if (image_data.data[i + 3]<=100) image_data.data[i + 3] -= 2;
+			if (image_data.data[i + 3]<10) image_data.data[i + 3] -= 5;
 		 };			//alpha自减，并防止减到负数
 	}
 	//把图像放回去
