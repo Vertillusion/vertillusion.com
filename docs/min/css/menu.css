@@ -82,8 +82,7 @@
   margin-top: 0.1rem;
 }
 #menu #open .navBox ul li {
-  background-color: #6C5CC8;
-	border-radius:19px;
+  background-color: #393c4a;
   cursor: pointer;
   margin-bottom: 4px;
 }
@@ -93,6 +92,7 @@
 }
 #menu #open .navBox ul li .obtain:hover {
 	background-color: #006CC8; 
+	border-radius:19px;
 }
 #menu #open .navBox ul li h2 {
   position: relative;
