@@ -1,6 +1,7 @@
 #menu {
   overflow: hidden;
-  height: auto;
+  position:absolute;
+  height: 100%;
   float: left;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -39,7 +40,8 @@
 #menu #open {
   /*显示菜单样式*/
   width: 2.6rem;
-  height: auto;
+  height: 100%;
+  position:absolute;
   background-color: #363a45;
   padding-bottom: 0.1rem;
   box-sizing: border-box;
