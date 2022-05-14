@@ -1,6 +1,8 @@
+body{
+	height:100%;
+}
 #menu {
   overflow: hidden;
-  position:absolute;
   height: 100%;
   float: left;
   -webkit-touch-callout: none;
