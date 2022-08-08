@@ -1,0 +1,24 @@
+@keyframes btn-float {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(0, -1rem);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes dropdown-collapse-show {
+    0% {
+        opacity: 0;
+        transform: translate(-1em);
+        transition: .2s;
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0);
+        transition: .2s;
+    }
+}

@@ -1,0 +1,128 @@
+* {
+    box-sizing: border-box;
+    position: relative;
+}
+
+html, body {
+    background-color: #13193c;
+    transition: 0s;
+}
+
+body {
+    margin: 0;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar {
+    display: flex;
+    padding: 0.5em 0;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-brand {
+    display: flex;
+    text-decoration: none;
+}
+a.navbar-brand {
+    display: block;
+}
+
+.navbar-nav {
+    display: flex;
+}
+
+ul.navbar-nav {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.navbar .nav-link {
+    display: block;
+    font-size: 18px;
+    padding: 0.5em;
+    color: #FFFFFFC8;
+    line-height: 18px;
+    transition: color .2s, transform .2s;
+}
+
+.navbar .nav-link.active,
+.navbar .nav-link:hover {
+    color: #FFFFFF;
+    transition: color .05s, transform .05s;
+    transform: scale(1.01);
+}
+
+.navbar-brand + .navbar-nav {
+    margin-left: 1rem;
+}
+
+.rounded {
+    border-radius: .375rem;
+}
+
+.container {
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.d-block {
+    display: block;
+}
+
+.ms-3 {
+    margin-left: 1.5rem;
+}
+
+.py-1 {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.py-3 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.ms-auto {
+    margin-left: auto;
+}
+
+.dropdown-collapse {
+    display: none;
+}
+
+.dropdown-trigger:hover .dropdown-collapse {
+    display: block;
+    position: absolute;
+    top: 100%;
+    width: auto;
+    animation: dropdown-collapse-show .1s;
+}
+
+.bg-dark {
+    background-color: #3c3c3cE0;
+}
+
+.list-group {
+    margin: 0;
+    padding: 1em;
+    list-style: none;
+    border-radius: .3em;
+}
+
+.list-group .list-group-item {
+    display: block;
+    padding: 0.5rem 1rem;
+    background-color: #f4f4f410;
+}
+.list-group .list-group-item:hover {
+    background-color: #f4f4f420;
+}

@@ -1,0 +1,128 @@
+@import url(framework.css);
+@import url(anims.css);
+
+* {
+    font-family: 'Microsoft YaHei', '微软雅黑';
+}
+
+html, body {
+    height: 100%;
+    background-color: #13193c;
+}
+
+header {
+    left: 0;
+    right: 0;
+    padding: 0 1em;
+    position: fixed;
+    background-color: #FFFFFF30;
+    z-index: 114514;
+    -webkit-backdrop-filter: blur(1em);
+    backdrop-filter: blur(.2rem);
+}
+
+#logo {
+    width: 35px;
+    height: 35px;
+    transition: transform .2s;
+}
+
+#logo:hover {
+    transform: scale(1.1) rotate(-7deg);
+}
+
+#canvas_container {
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#main,
+#canvas_container * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#canvas_container * {
+    object-fit: cover;
+}
+
+#main,
+#main-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#main-content {
+    min-width: 85%;
+}
+
+#slogan {
+    color: #eaeaea;
+    font-size: 4em;
+    font-weight: lighter;
+}
+
+#join {
+    display: inline-block;
+    color: #eaeaea;
+    font-size: 1.5em;
+    margin-top: 3rem;
+    padding: 1rem 3rem;
+    background-color: #5500ff;
+    border-radius: .3em;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: padding .2s, transform .2s, background-color .2s;
+    animation: btn-float 3s infinite;
+}
+
+#join:hover {
+    background-color: #3377ff;
+    padding: 1.1rem 3.1rem;
+    transition: padding .1s, transform .1s, background-color .1s;
+    animation-play-state:paused;
+}
+
+#join:active {
+    background-color: #3377ff;
+    padding: .9rem 2.9rem;
+    transition: padding .05s, transform .05s, background-color .05s;
+    animation-play-state:paused;
+}
+
+#main-content ul {
+    margin: 0;
+    padding: 1em;
+    list-style: none;
+    background-color: #f4f4f410;
+    border-radius: 1em;
+    min-height: 55vh;
+    -webkit-backdrop-filter: blur(.5em);
+    backdrop-filter: blur(.5em);
+    transition: margin .5s;
+}
+
+#main-content li {
+    margin: 1rem .5rem;
+}
+
+#main-content li a {
+    display: inline-block;
+    width: 20vw;
+    color: #f4f4f4;
+    font-size: 1.3rem;
+    padding: 1rem;
+    background-color: #f4f4f410;
+    border-radius: .5em;
+    transition: background-color .1s;
+}
+
+#main-content li a:hover {
+    background-color: #f4f4f420;
+}
+

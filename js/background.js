@@ -83,26 +83,28 @@ function star(x, y) {
 	};
 }
 function f(x) {
-	return 270*1.3**(((x-49)**2)/848*(-1))
-
+	return 270*1.3**(((x-49)**2)/848*(-1));
 }
+
+// canvas 直接搞常量
+const background_painter = document.getElementById("background_painter");
+
 //获取dom，更改一些东西
-canvas_dom = document.getElementById("background_drewer");//这里是获取canvas的dom啦
-canvas_dom.width = document.body.clientWidth;
-canvas_dom.height = document.body.clientHeight;//初始化，使canvas铺满全屏
+background_painter.width = document.body.scrollWidth;
+background_painter.height = document.body.scrollHeight;//初始化，使canvas铺满全屏
 center_point = {
-	x: randomFrom(0, document.body.clientWidth),
-	y: randomFrom(0, document.body.clientHeight),//确定中心点
+	x: randomFrom(0, document.body.scrollWidth),
+	y: randomFrom(0, document.body.scrollHeight),//确定中心点
 };
-ctx = canvas_dom.getContext("2d");
+ctx = background_painter.getContext("2d");
 star_array = []; //用于存储星星实体的数组
 
 //开始随机生成星星QWQ,从这开始就是初始化部分
 var StatNumber = 1600; //这里就是星星的数量啦qwq，小末哥哥有需要的话可以改哦
 for (var t = 0; t < StatNumber; t++) {
 	var temp = new star(
-		randomFrom(0, canvas_dom.width),
-		randomFrom(0, canvas_dom.height)
+		randomFrom(0, background_painter.width),
+		randomFrom(0, background_painter.height)
 		//随机产生星星的位置
 	);
 	temp.temp = randomFrom(-1000, 1000);//为了保证星星的位置不一样
@@ -121,13 +123,13 @@ for (var t = 0; t < StatNumber; t++) {
 }
 function update_frame() {
 	//为了拖尾就不要清除画布了
-	//ctx.clearRect(0,0,canvas_dom.width,canvas_dom.height);
+	//ctx.clearRect(0,0,background_painter.width,background_painter.height);
 	//绘制星星本体
 	for (index in star_array) {
 		star_array[index].drawSelf(ctx, center_point);
 	}
 	//降低上一帧的透明度值，叠加起来就是星轨的特效了
-	let image_data = ctx.getImageData(0, 0, canvas_dom.width, canvas_dom.height);
+	let image_data = ctx.getImageData(0, 0, background_painter.width, background_painter.height);
 	//遍历像素
 	let long = image_data.data.length;//提前取出长度
 	for (var i = 0; i < long; i += 4) {
@@ -145,10 +147,10 @@ function update_frame() {
 
 	window.requestAnimationFrame(update_frame);//请求下一帧
 }
+
 window.requestAnimationFrame(update_frame);//开始帧循环
-window.onresize = function a() {
+window.onresize = function () {
 	//自动调节canvas大小的函数
-	canvas_dom = document.getElementById("background_drewer");
-	canvas_dom.width = document.body.clientWidth;
-	canvas_dom.height = document.body.clientHeight;
+	background_painter.width = document.body.scrollWidth;
+	background_painter.height = document.body.scrollHeight;
 };
