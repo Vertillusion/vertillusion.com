@@ -1,67 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<meta charset="UTF-8" />
-	<title>Vertillusion Studio</title>
-	<meta name="keywords" content="Vertillusion" />
-	<meta name="description" content="Vertillusion Studio的创作小站 qwq" />
-	<link rel="icon" href="image/LOGO.png" />
-	<link rel="stylesheet" href="style/style.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertillusion Studio</title>
+    <link rel="stylesheet" href="/css/app.css" />
 	<script type="text/javascript" src="js/load.js"></script>
-	<link rel="stylesheet" href="css/normalize.min.css" />
-	<link rel="stylesheet" href="creation/css/style.css" />
-
 </head>
 
-<body></body>
-<div id="canvas_container" style="height: 100%; width: 100%;">
-	<canvas id="background_drewer"></canvas>
-</div>
-<img src="http://dl.vertillusion.xyz/media/images/Vertillusion_Website/LitNight_mount.png" alt="" id="front-img">
-<div id="gradient">"Vertex , 连线成梦"</div>
-<button id="button">
-	<a href="https://jq.qq.com/?_wv=1027&k=glGHx14l" target="_blank" class="white">现在加入</a>
-</button>
-</div>
-<div class="boxframe">
-	<div class="boxIframe">
-		<a href="https://lightframe.vertillusion.xyz">轻框 | LightFrame</a>
-	</div>
-	<div class="boxIframe">
-		<a href="https://space.bilibili.com/373454723" target="_blank">bilibili</a>
-	</div>
-	<div class="boxIframe">
-		<a href="https://github.com/EnderMo" target="_blank">GitHub</a>
-	</div>
-	<div class="boxIframe">
-		<a href="https://afdian.net/@EnderMo" target="_blank">捐助</a>
-	</div>
-</div>
-<div class="top">
-	<center>
-		<ul>
-			<li><img src="image/LOGO.png" width="32" height="32" /></li>
-			<li><a href="">Vertillusion Studio</a></li>
-			<li><a href="">主站</a></li>
+<body>
+    <header class="py-1">
+        <div class="navbar container">
+            <div class="navbar-nav">
+                <a class="navbar-brand" href="/">
+                    <img id="logo" alt="logo" class="d-block rounded" src="/img/logo.jpg" />
+                </a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a title="Vertillusion Studio" class="nav-link" href="/">Vertillusion Studio</a>
+                    </li>
+                    <li class="nav-item dropdown-trigger">
+                        <a title="传送门" class="nav-link" href="/">传送门</a>
+                        <div class="dropdown-collapse" style="width: 200px;">
+                            <div class="list-group bg-dark">
+                                <a class="list-group-item" href="https://me.Vertillusion.xyz/">创作站</a>
+                                <a class="list-group-item" href="http://cm.Vertillusion.xyz/">MC - Curve</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="navbar-nav">
+                    <li class="nav-item ms-auto">
+                        <a title="查看文档" class="nav-link" href="/docs/index.html">查看文档</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
 
-			<ri><a href="docs/index.html">查看文档</a></ri>
-			<li>
-				<a href="#">传送门</a>
-				<ul>
-					<li>
-						<a href="https://me.Vertillusion.xyz/" style="color: #4d9fec" ;>创作站</a>
-					</li>
-					<li>
-						<a href="http://cm.Vertillusion.xyz/"
-							style="color: #ec4e6e">MC-Curve</a>
-					</li>
-				</ul>
-			</li>
-		</ul>
-	</center>
-</div>
-<script type="text/javascript" src="js/background.js"></script>
+    <div id="canvas_container">
+        <img class="background" alt="sky_bg" src="/img/LitNight_sky.png" />
+        <canvas id="background_painter"></canvas>
+        <img class="background" alt="mountain_bg" src="/img/LitNight_mount.png" />
+    </div>
+
+    <div id="main">
+        <div id="main-content" class="container">
+            <div>
+                <h1 id="slogan">"Vertex , 连线成梦"</h1>
+                <a rel="noopener" id="join" target="_blank" href="https://jq.qq.com/?_wv=1027&k=glGHx14l">立即加入</a>
+            </div>
+            <div>
+                <ul>
+                    <li>
+                        <a rel="noopener" href="https://lightframe.vertillusion.xyz">轻框 | LightFrame</a>
+                    </li>
+                    <li>
+                        <a rel="noopener" href="https://space.bilibili.com/373454723">bilibili</a>
+                    </li>
+                    <li>
+                        <a rel="noopener" href="https://github.com/EnderMo">GitHub</a>
+                    </li>
+                    <li>
+                        <a rel="noopener" href="https://afdian.net/@EnderMo">捐助</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/background.js"></script>
 </body>
 
 </html>
