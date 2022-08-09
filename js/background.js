@@ -72,14 +72,31 @@ function star(x, y) {
 			Math.PI * 2,
 			false
 		);//这就是绘制星星本体的函数了
-		ctx.fillStyle = format(
-			"rgba({0},{1},{2}",
+		ctx.fillStyle=format(
+			"rgb({0},{1},{2})",
 			this.color.r.toString(),
 			this.color.g.toString(),
 			this.color.b.toString()
-		);//设置填充函数
+		);
 		ctx.closePath();
 		ctx.fill();//这就是填充啦
+		ctx.arc(
+			this.posizition.x,
+			this.posizition.y,
+			this.radiu-0.6,
+			0,
+			Math.PI * 2,
+			false
+		);//星星外面还有一圈
+		ctx.lineWidth=3;
+		ctx.strokeStyle=ctx.fillStyle=format(
+			"rgba({0},{1},{2},0.1)",
+			this.color.r.toString(),
+			this.color.g.toString(),
+			this.color.b.toString()
+		);
+		ctx.closePath();
+		ctx.stroke();
 	};
 }
 function f(x) {
@@ -108,7 +125,7 @@ for (var t = 0; t < StatNumber; t++) {
 		//随机产生星星的位置
 	);
 	temp.temp = randomFrom(-1000, 1000);//为了保证星星的位置不一样
-	var a = hsvToRgb([f(randomFrom(0, 100)), randomFrom(50, 100) , randomFrom(30, 100) ])
+	var a = hsvToRgb([f(randomFrom(14,86)), randomFrom(70, 100) , randomFrom(50, 100) ])
 
 	temp.color.r = a[0];
 	temp.color.g = a[1];
@@ -136,8 +153,8 @@ function update_frame() {
 		//i:r,i+1:g.i+2:b,i+3:alpha
 		if (image_data.data[i + 3] >=0) {
 			if (image_data.data[i + 3]>100) image_data.data[i + 3] -= 1.5;		//这个地方就是alpha值减少的速度，更改这个地方就可以更改星轨长度了
+			if (image_data.data[i + 3]<5) image_data.data[i + 3] = 0;
 			if (image_data.data[i + 3]<=100) image_data.data[i + 3] -= 2;
-			if (image_data.data[i + 3]<10) image_data.data[i + 3] -= 5;
 		 };			//alpha自减，并防止减到负数
 	}
 	//把图像放回去
