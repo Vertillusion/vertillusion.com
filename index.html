@@ -62,7 +62,7 @@
     <div class="card">
       <img class="card__picture" src="./img/stories/cimimoly_cv1.png" alt="">
       <div class="card-infos">
-      <h2 class="card__title"><a href="#stories/secondstoryqwq.html">云沫里的福腻</a></h2>
+      <h2 class="card__title"><a href="#stories/secondstoryqwq.html">夏初、云沫里的福腻</a></h2>
       <p class="card__text">
         狐沫酱也来一起社死OwO
       </p>
@@ -122,7 +122,7 @@ function scrollFunction() {
         })
     </script>
     <script type="text/javascript">
-      window.onload = function(){
+      function searchInit(){
         var  searchList = document.querySelectorAll("h2");
         //var searchList = ["qwq","qaq","www","awa","xwx"];
         var oul = document.getElementById("scontainer");
@@ -179,8 +179,8 @@ div.addEventListener('click',function(event){
   var hash = url.substring(url.indexOf("#") + 1)
   return hash
 }
-window.addEventListener('hashchange', function() {
-  if(getHashParam()!='')
+function InitStoryCard(){
+if(getHashParam()!='')
   {
    document.getElementById("StoryBack").style.display="block";
   document.getElementById("StoryCont").style.display="block";
@@ -193,11 +193,17 @@ else
   var content=getHashParam();
   console.log(content);
     document.getElementById("StoryInnerCon").data=content;
+}
+window.addEventListener('hashchange', function() {
+  InitStoryCard();
 }, false);
 function StoryHide(){
   location.hash='';
 }
-
+ window.onload = function(){
+        searchInit();
+        InitStoryCard();
+      }
 </script>
 
     		
