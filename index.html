@@ -22,9 +22,9 @@
   <body>
     <div style="position:relative;top:0px;height:50px;width:auto;  padding: 50px 10px; ">
   <div id="navbar">
-  <a href="" id="logo"><img src="img/VertillusionNew_OutColor_240.png" style="height:30px; width:auto;   vertical-align: middle;padding:0px;margin:0px;border:0;"></img> Vertillusion Studio</a>
+  <a href="#" id="logo"><img src="img/VertillusionNew_OutColor_240.png" style="height:30px; width:auto;   vertical-align: middle;padding:0px;margin:0px;border:0;"></img> Vertillusion Studio</a>
   <div id="navbar-right">
-    <a href="">Home</a>
+    <a href="#">Home</a>
   </div>
 </div>
 </div>
@@ -177,7 +177,8 @@ div.addEventListener('click',function(event){
   function getHashParam() {
   var url = location.href
   var hash = url.substring(url.indexOf("#") + 1)
-  return hash
+  if(url.search('#')!==-1){return hash}
+  else {return ''}
 }
 function InitStoryCard(){
 if(getHashParam()!='')
@@ -197,13 +198,13 @@ else
 window.addEventListener('hashchange', function() {
   InitStoryCard();
 }, false);
-function StoryHide(){
-  location.hash='';
-}
  window.onload = function(){
         searchInit();
         InitStoryCard();
       }
+function StoryHide(){
+  location.hash='';
+}
 </script>
 
     		
