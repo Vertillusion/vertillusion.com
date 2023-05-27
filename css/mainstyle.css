@@ -322,7 +322,7 @@ transform: translateZ(1px);
   position:fixed;
   z-index:99;
   display:none;
-  overflow:auto;
+  overflow:hidden;
 transform: translateZ(1px) translateY(12.5%);
 }
 .footer
