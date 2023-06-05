@@ -5,6 +5,8 @@
     <link rel="apple-touch-icon" href="img/Newico.png" />
     <title>Vertillusion: Meet, Inspire, Create.</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
       body, html {
         min-width: 100%;
@@ -22,9 +24,7 @@
   <body>
     <div style="position:relative;top:0px;height:50px;width:auto;  padding: 50px 10px; ">
   <div id="navbar">
-  <a href="#" id="logo"><img src="img/VertillusionNew_OutColor_240.png" style="height:30px; width:auto;   vertical-align: middle;padding:0px;margin:0px;border:0;"></img> Vertillusion Studio</a>
-  <div id="navbar-right">
-    <a href="#">Home</a>
+      
   </div>
 </div>
 </div>
@@ -107,10 +107,14 @@
 function scrollFunction() {
   if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
     document.getElementById("navbar").style.padding = "20px 10px";
-    document.getElementById("logo").style.fontSize = "18px";
+      if (window.innerWidth < 500) {
+    document.getElementById("navbar-right").style.display = "none";
+}
   } else {
     document.getElementById("navbar").style.padding = "50px 10px";
-    document.getElementById("logo").style.fontSize = "18px";
+          if (window.innerWidth < 500) {
+    document.getElementById("navbar-right").style.display = "block";
+}
   }
 }
   </script>
@@ -151,7 +155,8 @@ function scrollFunction() {
         //}
       }
     </script>
-<script type="text/javascript" src="./js/sortable.min.js"></script>
+<script type="text/javascript" src="js/sortable.min.js"></script>
+<script type="text/javascript" src="js/zepto.min.js"></script>
 <script type="text/javascript">
 document.querySelector('#sortable').sortablejs();
 </script>
@@ -173,6 +178,11 @@ div.addEventListener('click',function(event){
   event.stopPropagation();
 })
 </script>
+
+
+
+
+
 <script type="text/javascript">
   function getHashParam() {
   var url = location.href
@@ -207,6 +217,9 @@ function StoryHide(){
 }
 </script>
 
+<script type="text/javascript">
+    $('#navbar').load('com/uninav.html')
+</script>
     		
 
 </html>

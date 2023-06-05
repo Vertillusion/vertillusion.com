@@ -136,7 +136,6 @@ overflow:hidden;
 
   #navbar {
     left:0;
-  overflow: hidden;
   background-color: RGBA(255,255,255,1);
   padding: 50px 10px; 
   transition: 0.8s; 
@@ -153,7 +152,7 @@ overflow:hidden;
   padding: 12px 40px;
   margin-right:30px;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 17px;
   line-height: 25px;
   border-radius: 2px;
   font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
@@ -172,7 +171,13 @@ font-family: Futura, "Trebuchet MS", Arial, sans-serif;
   color: black;
   transform:scale(1)!important;
 }
-
+#navbar:hover #logo
+{
+background-color: RGB(255,255,255,0.0);
+  /*box-shadow:0 0 0 2px RGBA(20,20,20,0.5);*/
+  color: black;
+  transform:scale(1)!important;
+}
 #navbar a.active {
   background-color: dodgerblue;
   color: white;
@@ -196,7 +201,42 @@ font-family: Futura, "Trebuchet MS", Arial, sans-serif;
   }
 }
 
-  
+  .dropContainer{
+        display: none;
+        background-color: RGBA(255,255,255,0.7);
+        position: relative;
+        float: none;
+        margin-top:50px;
+        width: 200px;
+      }
+       .dropContainer ul{
+            float: left;
+        }
+  #navbar ul li:hover ul{
+         display: block; 
+}
+  #navbar ul li:hover .dropContainer{
+         display: block; 
+}
+      #navbar ul{
+        margin:0;
+        padding:0;
+           list-style-type: none;
+       }
+      #navbar ul a{
+        list-style-type: none;
+        overflow: hidden;
+        text-decoration: none;
+      }
+      #navbar li{
+        list-style-type: none;
+        display: block;
+        float: left;
+        margin-right:0px;
+        text-align: center;
+        color: white;
+      }
+
       
       .scrollbar {
         width: 30px;
@@ -337,3 +377,12 @@ transform: translateZ(1px) translateY(12.5%);
    height:fit-content;
 }
     
+.unisvg{
+  transform:rotateZ(0deg) translate(2px,2px);
+  transition:.3s;
+}
+#navbar-right a:hover .unisvg
+{
+  transition:.3s;
+  transform:rotateZ(90deg) translateX(2px);
+}
