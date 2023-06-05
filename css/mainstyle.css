@@ -200,6 +200,12 @@ background-color: RGB(255,255,255,0.0);
     float: none;
   }
 }
+@media screen and (max-width: 400px) {
+  #navbar #logo {
+  font-size: 16px;
+}
+
+  }
 
   .dropContainer{
         display: none;
