@@ -162,7 +162,7 @@ overflow:hidden;
   font-size: 18px;
   font-weight: bold;
   transition: 0.4s;
-font-family: Futura, "Trebuchet MS", Arial, sans-serif; 
+font-family: Futura, "Century Gothic","Trebuchet MS", Arial, sans-serif; 
 }
 
 #navbar a:hover {
@@ -206,6 +206,9 @@ background-color: RGB(255,255,255,0.0);
 }
   #navbar a {
   font-size: 14px;
+}
+#navbar img{
+  transform:scale(0.8);
 }
   }
 
