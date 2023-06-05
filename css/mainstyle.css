@@ -187,7 +187,7 @@ background-color: RGB(255,255,255,0.0);
   float: right;
 }
 
-@media screen and (max-width: 580px) {
+@media screen and (max-width: 600px) {
   #navbar {
     padding: 20px 10px !important;
   }
@@ -282,8 +282,22 @@ background-color: RGB(255,255,255,0.0);
     
     
       .PageBox{
-        position:relative;padding-left:15%;padding-right:15%;min-width:500px;overflow-x:auto
+        position:relative;padding-left:15%;padding-right:15%;min-width:300px;overflow-x:auto
       }
+@media screen and (max-width: 500px) {
+  .PageBox .innerFrame{
+    width:100%;
+     height:43px;
+
+  }
+  .PageBox .innerFrame .NoBorder{
+    width:60%;
+  }
+    .PageBox .innerItemSolid {
+    float:right;
+  }
+}
+
       .PageBoxTitle{
         line-height: 40px;
         font-size:20px;

@@ -5,7 +5,7 @@
     <link rel="apple-touch-icon" href="img/Newico.png" />
     <title>Vertillusion: Meet, Inspire, Create.</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
       body, html {
@@ -219,22 +219,6 @@ function StoryHide(){
 
 <script type="text/javascript">
     $('#navbar').load('com/uninav.html')
-</script>
-<script>
-  (function(){
-  var calc = function(){
-    //获取文档的元素赋值给docElement保存
-    var docElement = document.documentElement;
-    //如果页面的宽度大于750px 那么让它等于750px 否则返回页面的宽度 最后赋值保存到定义的clientWidthValue
-    var clientWidthValue = docElement.clientWidth>750?750:docElement.clientWidth;
-    //设置字体比例
-    docElement.style.fontSize= 16*(clientWidthValue/375)+'px';
-  }
-  calc();//调用函数
-  window.addEventListener('resize',calc);//全局执行事件（自定义屏幕尺寸）
-})()
-
-
 </script>
 
 </html>
