@@ -118,23 +118,7 @@ function scrollFunction() {
   }
 }
 
-function toggleNav() {
-  var x = document.getElementById("navbar-right");
-  if (x.style.display == "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-function CheckViewSize(){
-      var x = document.getElementById("navbar-right");
-                    if (window.innerWidth < 550) {
-             
-               x.style.display = "none";
-             }
-             else{ x.style.display = "block";}
 
-};
 
   </script>
       <script>
@@ -227,6 +211,23 @@ else
 window.addEventListener('hashchange', function() {
   InitStoryCard();
 }, false);
+function toggleNav() {
+  var x = document.getElementById("navbar-right");
+  if (x.style.display == "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+function CheckViewSize(){
+      var x = document.getElementById("navbar-right");
+                    if (window.innerWidth < 550) {
+             
+               x.style.display = "none";
+             }
+             else{ x.style.display = "block";}
+
+};
  window.onload = function(){
         searchInit();
         InitStoryCard();
