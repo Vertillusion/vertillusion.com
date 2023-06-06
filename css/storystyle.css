@@ -54,6 +54,11 @@ position:absolute;
       	width:30rem;
       	box-shadow:5px 10px 30px 0 RGB(20,20,20,.3),0px 0px 0px 2px RGB(210,210,210);
       }
+@media screen and (max-width: 600px) {
+  .cvTitle{
+	width:85%;
+}
+}
       .centerText
       {
       	position:relative;top:50%;transform:translateY(-50%);
