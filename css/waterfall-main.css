@@ -81,6 +81,15 @@ hr{
   margin: 0;
   color: #86888A;
 }
+@media screen and (max-width: 550px) {
+ .card__title{
+  font-size: 0.8rem;
+}
+.card__text{
+  font-size: 0.6rem;
+}
+}
+
 .card__text--high{
   font-weight: 600;
 }
