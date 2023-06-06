@@ -232,9 +232,9 @@ function CheckViewSize(){
         searchInit();
         InitStoryCard();
         CheckViewSize();
-        var evt = window.document.createEvent('UIEvents'); 
-    evt.initUIEvent('scroll', true, false, window, 0); 
-   window.dispatchEvent(evt);
+var e = document.createEvent("Event");
+e.init("resize", true, true);
+window.dispatchEvent(e);
       }
 function StoryHide(){
   location.hash='';
