@@ -248,6 +248,7 @@ background-color: RGB(255,255,255,0.0);
 }
   #navbar-right {
     float: none;
+    display:none;
   }
   }
 
@@ -347,7 +348,7 @@ background-color: RGB(255,255,255,0.0);
     float:right;
   }
    .PageBoxTitle{
-    font-size:1.1rem!important;
+    font-size:1.0rem!important;
      line-height: 50px!important;
    }
 }
