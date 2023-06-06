@@ -224,7 +224,7 @@ background-color: RGB(255,255,255,0.0);
   float:right;
   margin-right:-25px;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 720px) {
   #navbar {
     padding: 20px 10px ;
   }
@@ -234,7 +234,7 @@ background-color: RGB(255,255,255,0.0);
     text-align: left;
   }
 }
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 720px) {
   #navbar #logo {
   font-size:0;
 }
