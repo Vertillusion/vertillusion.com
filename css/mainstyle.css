@@ -334,7 +334,7 @@ background-color: RGB(255,255,255,0.0);
       .PageBox{
         position:relative;padding-left:15%;padding-right:15%;min-width:300px;overflow-x:auto
       }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
   .PageBox .innerFrame{
     width:100%;
      height:43px;
@@ -347,6 +347,7 @@ background-color: RGB(255,255,255,0.0);
     float:right;
   }
    .PageBoxTitle{
+    font-size:1.1rem!important;
      line-height: 50px!important;
    }
 }
