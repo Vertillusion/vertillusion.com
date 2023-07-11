@@ -19,20 +19,36 @@
       }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/waterfall-main.css">
      <link rel="stylesheet" href="css/mainstyle.css">
   </head>
   <body>
+    <div class="iView">
+  <img src="img/VisPlanet.png"class="ViewContent"id="iView_bg" />
+  <div class="iViewFloatBox" ><p id="iView_t">In The Garden</p><p id="iView_hidden">[价值与美不为任何方圆所束缚] (Art by CimiMoly)</p></div>
+    <div class="iViewFloatRefreshBox" onclick="refreshBackground();"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="biTransNormal" viewBox="0 0 16 16">
+  <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+  <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+</svg></div>
+<div class="iViewFloatScrollBox" onclick="ToggleDrawer();"><btx>Scroll Up</btx><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="biTransNormal" viewBox="0 0 16 16">
+  <path d="M3 5.188C3 2.341 5.22 0 8 0s5 2.342 5 5.188v5.625C13 13.658 10.78 16 8 16s-5-2.342-5-5.188V5.189zm4.5-4.155C5.541 1.289 4 3.035 4 5.188V5.5h3.5V1.033zm1 0V5.5H12v-.313c0-2.152-1.541-3.898-3.5-4.154zM12 6.5H4v4.313C4 13.145 5.81 15 8 15s4-1.855 4-4.188V6.5z"/>
+</svg></div>
+<div class="iViewDrawer"></div>
+</div>
+    <div class="Content" id="mainCon" onscroll="scrollFunction();">
     <div style="position:relative;top:0px;height:50px;width:auto;  padding: 50px 10px; ">
   <div id="navbar">
       
   </div>
 </div>
-</div>
 <!--content-->
-<div class="iView">
-  <img src="img/VisPlanet.png"class="ViewContent" />
-  <img src="img/VisForum.png"class="ViewContent" onclick="window.location.href='https://forum.vertillusion.xyz'"/>
+<div class="pageTitleDiv">
+  <p class="pageTitle">Meet , Inspire , Create</p>
+  <a class="pageTitleDes center-line" style="transform:translateY(-2rem);" href="#?link=stories/discover.html">Discover <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+  <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+</svg></a>
 </div>
 <div class="PageBox">
 <div style="margin-top:80px;height:50px;">
@@ -63,7 +79,7 @@
     <div class="card">
       <img class="card__picture" src="./img/stories/cimimoly_cv1.png" alt="">
       <div class="card-infos">
-      <h2 class="card__title"><a href="#stories/secondstoryqwq.html">夏初、云沫里的福腻</a></h2>
+      <h2 class="card__title"><a href="#?link=stories/secondstoryqwq.html">夏初、云沫里的福腻</a></h2>
       <p class="card__text">
         狐沫酱也来一起社死OwO
       </p>
@@ -75,7 +91,7 @@
     <div class="card">
       <img class="card__picture" src="./img/stories/baicai_cv1.jpg" alt="">
       <div class="card-infos">
-      <h2 class="card__title"><a href="#stories/firststoryqwq.html">关于咱们的一点小东西</a></h2>
+      <h2 class="card__title"><a href="#?link=stories/firststoryqwq.html">关于咱们的一点小东西</a></h2>
       <p class="card__text">
         被迫营业!
       </p>
@@ -102,11 +118,61 @@
   <h5>Copyright © 2023 Vertillusion Studio. All rights reserved.</h5>
 </div>
   </body>
+
+ <script>
+       var s= false;
+  function ToggleDrawer()
+  {
+    if(s==false){
+      d.style.height=480+"px";
+      s=true; return;}
+          if(s==true){
+        d.style.height=0+"px";
+      s=false;return;
+      }
+
+  }
+  var i =0;
+   let d=document.querySelector('.iViewDrawer')
+        let viewbox=document.querySelector('.iView')
+        viewbox.addEventListener('wheel',(event)=>{
+            event.preventDefault()
+            i+=event.wheelDelta/2;
+            if(i<0)i=0;
+            if(i>480)i=480;
+            d.style.height=i+"px";
+          //  console.log(i)
+        })
+    </script>
+<script type="text/javascript">
+  //m-n
+  function refreshBackground()
+  {
+  var id=Math.floor(Math.random() * (1 - 0 + 1)) + 0;
+  console.log(id);
+  var bg= document.getElementById("iView_bg");
+  var ti= document.getElementById("iView_t");
+  var de= document.getElementById("iView_hidden");
+   const srcs = [];
+srcs.push("img/VisPlanet.png", "img/VisNiceDay.png");
+   const titles = [];
+titles.push("In The Garden", "A Nice Day");
+   const des = [];
+des.push("[价值与美不为任何方圆所束缚] (Art by CimiMoly)", "[惬意的阳光下总会有那点满怀期待的时刻] (Art by CimiMoly)");
+  console.log(srcs[id]);
+bg.src=srcs[id];
+ti.innerHTML=titles[id];
+de.innerHTML=des[id];
+
+}
+</script>
+
   <script>
-    window.onscroll = function() {scrollFunction()};
+
 
 function scrollFunction() {
-  if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+          var view=document.getElementById("mainCon");
+  if (view.scrollTop >80) {
     document.getElementById("navbar").style.padding = "20px 10px";
       if (window.innerWidth < 700) {
 }
@@ -121,13 +187,7 @@ function scrollFunction() {
 
 
   </script>
-      <script>
-        let viewbox=document.querySelector('.iView')
-        viewbox.addEventListener('wheel',(event)=>{
-            event.preventDefault()
-            viewbox.scrollLeft+=event.deltaY
-        })
-    </script>
+     
     <script type="text/javascript">
       function searchInit(){
         var  searchList = document.querySelectorAll("h2");
@@ -143,7 +203,7 @@ function scrollFunction() {
             }
           }
           //Clear
-          document.getElementById("scontainer").innerHTML = "我们找到了这些 :";
+          document.getElementById("scontainer").innerHTML = "<p>我们找到了这些 :</p>";
           for(var p = 0;p < a.length;p ++){
             //Add
             let con = document.createElement("li");
@@ -158,8 +218,8 @@ function scrollFunction() {
         //}
       }
     </script>
-    <script type="text/javascript" src="js/sortable.min.js"></script>
-    <script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/sortable.min.js"></script>
+<script type="text/javascript" src="js/zepto.min.js"></script>
 <script type="text/javascript">
 document.querySelector('#sortable').sortablejs();
 </script>
@@ -169,7 +229,7 @@ const btn = document.getElementById('an');
 const div = document.getElementById('scontainer');
 
 btn.addEventListener('click',function(event){
-    div.style.display='block';
+  div.style.display='block';
   event.stopPropagation();
 })
 
@@ -185,7 +245,6 @@ div.addEventListener('click',function(event){
 
 
 
-
 <script type="text/javascript">
   function getHashParam() {
   var url = location.href
@@ -193,9 +252,18 @@ div.addEventListener('click',function(event){
   if(url.search('#')!==-1){return hash}
   else {return ''}
 }
+function getHashLink(key) {
+  const url = location.href
+  const hash = url.substring(url.indexOf("#") + 1)
+  const searchIndex = hash.indexOf("?")
+  const search = searchIndex !== -1 ? hash.substring(searchIndex + 1) : ""
+  const usp = new URLSearchParams(search)
+  return usp.get(key)
+}
 function InitStoryCard(){
-if(getHashParam()!='')
+if(getHashParam().includes('?link'))
   {
+
    document.getElementById("StoryBack").style.display="block";
   document.getElementById("StoryCont").style.display="block";
 }
@@ -204,7 +272,7 @@ else
     document.getElementById("StoryBack").style.display="none";
   document.getElementById("StoryCont").style.display="none";
 }
-  var content=getHashParam();
+  var content=getHashLink('link');
   console.log(content);
     document.getElementById("StoryInnerCon").data=content;
 }
@@ -221,11 +289,11 @@ function toggleNav() {
 }
 function CheckViewSize(){
       var x = document.getElementById("navbar-right");
-                    if (window.innerWidth < 720) {
+                    if (window.innerWidth < 1110) {
              
-               x.style.display = "none";
+              x.style.display = "none";
              }
-             else{ x.style.display = "block";}
+             else{ x.style.display = "block"; }
 
 };
  window.onload = function(){
@@ -244,4 +312,5 @@ function StoryHide(){
 <script>
 window.onresize = function(){CheckViewSize();};
 </script>
+
 </html>
