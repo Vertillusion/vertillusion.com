@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>Meet Vertillusion(*/ω＼*)</title>
+              <link rel="stylesheet" href="https://vertillusion.com/css/mainstyle.css">
+              <link rel="stylesheet" href="https://vertillusion.com/css/storystyle.css">
+    <style type="text/css">
+
+        body{
+            font-size: 20px;
+            font-family: 'Merriweather', sans-serif;
+            color: #333;
+          font-weight: 300;
+          text-align: center;
+          background-color: #fff;
+        }
+        p{
+          font-size:16px;
+        }
+        .question{
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+        .answers {
+          margin-bottom: 20px;
+          text-align: left;
+          display: inline-block;
+        }
+        .answers label{
+          display: block;
+          margin-bottom: 10px;
+        }
+        .slide{
+          position: absolute;
+          transform:scale(0.95);
+          right: 0px;
+          top: 0px;
+          filter:blur(15px);
+          width: 100%;
+          z-index: -1;
+          opacity: 0;
+          transition: 0.75s;
+        }
+        .active-slide{
+          transform:scale(1);
+            right: 0px;
+            top: 0px;
+             filter:blur(0px);
+          opacity: 1;
+          z-index: 2;
+        }
+        .quiz-container{
+          position: relative;
+          height: 200px;
+          margin-top: 40px;
+        }
+label{
+    line-height: 20px;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right:15px;
+    color: #777;
+}
+.radio_type{
+    width: 20px;
+    height: 20px;
+    appearance: none;
+    position: relative;
+    transform:translateY(-3px);
+}
+.radio_type:before{
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgb(150,150,150);
+    display: inline-block;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.radio_type:checked:before{
+    content: '';
+    width: 20px;
+    height: 20px;
+    box-shadow: 0px 0px 0px 1px rgb(119,127,189);
+    background:#C9D7FF;
+    display: inline-block;
+    border-radius: 50%;
+    vertical-align: middle;
+    transition:all 0.3s;
+}
+.radio_type:checked:after{
+    content: '';
+    width: 10px;
+    height:5px;
+    border: 2px solid white;
+    border-top: transparent;
+    border-right: transparent;
+    text-align: center;
+    display: block;
+    position: absolute;
+    top: 6px;
+    left:5px;
+    vertical-align: middle;
+    transform: rotate(-45deg);
+}
+.radio_type:checked+label{
+    color: #c59c5a;
+}
+@media screen and (max-width: 750px) {
+  body{
+  font-size:15px;
+}
+  p{
+  font-size:12px;
+}
+.question{
+          font-size: 18px;
+        }
+.innerItem{
+  transform:translateY(140px);
+}
+.innerFrame{
+  transform:translateY(140px);
+}
+}
+    </style>
+</head>
+<body>
+    <p>HiHi~~ 这是一个进入内群的自助测试喔(●'◡'●)</p>
+    <p>虽然你可以在页面源码里看到答案 可这个东西是为了让大家更好的相处才做的呀 希望看到真实的你喔</p>
+    <p>咱们要一起维护这个温暖的小家!(/▽＼)</p>
+    <div class="quiz-container">
+      <div id="quiz"></div>
+    </div>
+    <div>
+    <button class="innerFrame" id="previous" style="width:140px;height:40px;">上一个</button>
+    <p></p>
+    <button class="innerItem" id="next" style="width:140px;height:40px;">下一个</button>
+    <button class="innerFrame" id="submit" style="width:140px;height:40px;">完成</button>
+  </div>
+    <div id="results"></div>
+    <script type="text/javascript">
+        (function() {
+          const myQuestions = [
+            {
+              question: "[日常向]群里有一个经常讨论的话题,而且此时讨论得正激烈,但并不是你喜欢的甚至是你厌恶的,你会怎么样呢?",
+              answers: {
+                A: "打断,直接带来一个新的话题",
+                B: "安静看看,或者先去做自己的事情,以后可能找机会融入",
+                C: "和别人说自己不想看到这些,以后少讨论",
+                D: "强行说有违规内容,为了互联网环境,果断举报"
+              },
+              correctAnswer: "B",subcorrectAnswer: "NULL"
+            },
+            {
+              question: "[日常向]有人花了不少时间去做一个TA很喜欢但是技术含量不高的作品,若你是一个水平还不错的人,你会怎么对TA说?",
+              answers: {
+                A: "\"什么垃圾\"",
+                B: "\"不如让我来做\",然后说自己会怎么做",
+                C: "\"好诶!咱先看看\",之后尝试去给出一点改进的建议",
+                D: "\"我看过了,别把时间花这些东西上啦,快去学习一点有用的东西\""
+              },
+              correctAnswer: "C",subcorrectAnswer: "NULL"
+            },
+            {
+              question: "[日常向]别人给自己的原生应用设计了一个UI,但你觉得不好看,你会:",
+              answers: {
+                A: "\"这个ui好丑（\"",
+                B: "\"别自己设计了,去用ui库吧\"",
+                C: "\"这里的排版和颜色字体改改会不会更好呢xwx\",有时间的话帮别人一起完善",
+                D: "\"建议重新学学怎么做ui\""
+              },
+              correctAnswer: "C",subcorrectAnswer: "NULL"
+            },
+             {
+              question: "[日常向]这里成了一对新的cp,你会:",
+              answers: {
+                A: "\"哎,我感觉自己一个人才是最好的\"(或者类似话语)",
+                B: "\"祝贺w!\"(或者类似话语/表情)",
+                C: "\"个人建议，你们再好好想想未来吧。。。\"(或者类似话语)",
+                D: "一声不吭,假装没看见"
+              },
+              correctAnswer: "B",subcorrectAnswer: "D"
+            },
+            {
+              question: "[日常向]来到这里以后,你发现自己似乎融不进来,而此刻一个于你无关紧要的话题正讨论的热火朝天,你会:",
+              answers: {
+                A: "和大家说认为自己被排斥",
+                B: "使劲找话题,把自己的强项带进来说,试图让大家对自己的东西感兴趣",
+                C: "先安静,尽量不打扰群内的秩序,或者发点很Cute的表情包应和一下,or在大家的心中塑造自己的好印象",
+                D: "表达自己对于大家的不解",
+                E: "呼吁大家要多干点有意义的事情",
+              },
+              correctAnswer: "C",subcorrectAnswer: "NULL"
+            }
+          ];
+
+          function buildQuiz() {
+            // we'll need a place to store the HTML output
+            const output = [];
+
+            // for each question...
+            myQuestions.forEach((currentQuestion, questionNumber) => {
+              // we'll want to store the list of answer choices
+              const answers = [];
+
+              // and for each available answer...
+              for (letter in currentQuestion.answers) {
+                // ...add an HTML radio button
+                answers.push(
+                  `<label>
+                     <input type="radio" class="radio_type" name="question${questionNumber}" value="${letter}">
+                      ${letter} :
+                      ${currentQuestion.answers[letter]}
+                   </label>`
+                );
+              }
+
+              // add this question and its answers to the output
+              output.push(
+                `<div class="slide">
+                   <div class="question"> ${currentQuestion.question} </div>
+                   <div class="answers"> ${answers.join("")} </div>
+                 </div>`
+              );
+            });
+
+            // finally combine our output list into one string of HTML and put it on the page
+            quizContainer.innerHTML = output.join("");
+          }
+
+          function showResults() {
+            // gather answer containers from our quiz
+            const answerContainers = quizContainer.querySelectorAll(".answers");
+
+            // keep track of user's answers
+            let numCorrect = 0;
+            var score = 0;
+            // for each question...
+            myQuestions.forEach((currentQuestion, questionNumber) => {
+              // find selected answer
+              const answerContainer = answerContainers[questionNumber];
+              const selector = `input[name=question${questionNumber}]:checked`;
+              const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+              // if answer is correct
+              if (userAnswer == currentQuestion.correctAnswer) {
+                // add to the number of correct answers
+                numCorrect++;
+                score+=10
+                // color the answers green
+                answerContainers[questionNumber].style.color = "lightgreen";
+              } 
+ else if (userAnswer == currentQuestion.subcorrectAnswer) {
+                // add to the number of correct answers
+                numCorrect++;
+                score+=5
+                // color the answers green
+                answerContainers[questionNumber].style.color = "lightgreen";
+              }
+              else {
+               
+                // if answer is wrong or blank
+                // color the answers red
+                answerContainers[questionNumber].style.color = "red";
+              }
+            });
+
+            // show number of correct answers out of total
+            resultsContainer.innerHTML = `${numCorrect}/${myQuestions.length},分数${score}`;
+          }
+
+          function showSlide(n) {
+            slides[currentSlide].classList.remove("active-slide");
+            slides[n].classList.add("active-slide");
+            currentSlide = n;
+            
+            if (currentSlide === 0) {
+              previousButton.style.display = "none";
+            } else {
+              previousButton.style.display = "inline-block";
+            }
+            
+            if (currentSlide === slides.length - 1) {
+              nextButton.style.display = "none";
+              submitButton.style.display = "inline-block";
+            } else {
+              nextButton.style.display = "inline-block";
+              submitButton.style.display = "none";
+            }
+          }
+
+          function showNextSlide() {
+            showSlide(currentSlide + 1);
+          }
+
+          function showPreviousSlide() {
+            showSlide(currentSlide - 1);
+          }
+
+          const quizContainer = document.getElementById("quiz");
+          const resultsContainer = document.getElementById("results");
+          const submitButton = document.getElementById("submit");
+
+          buildQuiz();
+
+          const previousButton = document.getElementById("previous");
+          const nextButton = document.getElementById("next");
+          const slides = document.querySelectorAll(".slide");
+          let currentSlide = 0;
+
+          showSlide(0);
+          submitButton.addEventListener("click", showResults);
+          previousButton.addEventListener("click", showPreviousSlide);
+          nextButton.addEventListener("click", showNextSlide);
+        })();
+    </script>
+</body>
+</html>

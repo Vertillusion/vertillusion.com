@@ -54,6 +54,10 @@ hr{
   display: flex;
   flex-direction: column;
   transition: box-shadow .2s ease-in-out;
+  overflow:hidden;
+}
+.card_bg_set{
+  background: rgba(20,20,20,.05);
 }
 .card__picture{
   display: block;
@@ -62,11 +66,17 @@ hr{
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
 }
+.card__set{
+  filter:saturate(130%) blur(24px);
+}
 .card-infos{
   padding: 20px;
   background: #fff;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
+}
+.card-infos-set{
+  background: rgba(20,20,20,.05);
 }
 .card__title{
   font-family: 'Hind';
