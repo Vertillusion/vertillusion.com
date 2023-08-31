@@ -79,3 +79,15 @@ position:absolute;
        word-break: normal;
        white-space:pre-wrap; 
       }
+            a {
+  text-decoration:none ;
+    display: inline-block;
+    color: RGB(115,127,188);
+
+    transition:  .1s;
+}
+
+a:hover {
+   transform: scale(1.05);
+   color: RGB(135,147,188);
+}
