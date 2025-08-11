@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USEFUL LINKS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            text-align: center;
+        }
+          .lineframe{
+border-radius:30px;
+        border:3px solid RGBA(255,255,255,0);
+        box-shadow:0 0 0 2px #737fbc;
+        color:#485696;
+        font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        line-height:30px;
+        text-align:center;
+}
+      .innerItem{
+      	 position: absolute;
+            bottom: 20px;
+            left: calc(100% - 120px);
+background-color:#c6d7ff;
+        border-radius:30px;
+        border:3px solid RGBA(255,255,255,0);
+        outline:none;
+        color:#485696;
+        width:100px;
+           font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        line-height:30px;
+        text-align:center;
+        box-shadow:0 0 0 1px #737fbc;
+        overflow:hidden;
+        background-clip:padding-box;
+        
+      }
+      .innerItemSolid{
+background-color:#c6d7ff;
+        border-radius:30px;
+        border:3px solid RGBA(255,255,255,0);
+        outline:none;
+        color:#485696;
+        position:relative;
+           font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        line-height:30px;
+        text-align:center;
+        box-shadow:0 0 0 1px RGBA(0,0,0,0);
+        overflow:hidden;
+        background-clip:padding-box;
+        
+      }
+
+            .innerFrame{
+background-color:RGB(255,255,255);
+        border-radius:30px;
+        border:2px solid #737fbc;
+        outline:none;
+        color:#485696;
+        position:relative;
+           font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+        line-height:30px;
+        text-align:center;
+        overflow:hidden;
+        background-clip:padding-box;
+        width:fit-content;
+         width:-webkit-fit-content;
+      }
+          .NoBorder{
+        border:3px solid RGBA(255,255,255,0);
+        outline:none!important;
+        box-shadow:0 0 0 1px RGBA(255,255,255,0)!important;
+      }
+      button:hover{
+             
+               animation:ExtOut 0.3s ease-in-out;
+               animation-iteration-count:1;
+               animation-fill-mode:forwards;
+}
+      .innerItem{
+             
+               animation:ExtIn 0.3s ease-in-out;
+               animation-iteration-count:1;
+               animation-fill-mode:forwards;
+     }
+    
+    
+      @keyframes ExtOut{
+        0%{
+            border:3px solid RGBA(255,255,255,0);
+        box-shadow: 0 0 0 1px #737fbc;
+
+}
+          
+       
+100%{
+          
+                        border:3px solid #c6d7ff;
+          box-shadow: 0 0 0 2px #737fbc;
+}
+
+}
+      @keyframes ExtIn{
+        0%{
+
+                        border:3px solid #c6d7ff;
+          box-shadow: 0 0 0 2px #737fbc;
+}
+          
+       
+100%{
+          
+            border:3px solid RGBA(255,255,255,0);
+        box-shadow: 0 0 0 1px #737fbc;
+}
+
+}
+
+@keyframes DivFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes DivBlurIn {
+  from {
+    opacity: 0;
+    filter:blur(5px);
+  }
+
+  to {
+    opacity: 1;
+        filter:blur(0px);
+  }
+}
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight:600px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 2px;
+            background-color: #333;
+            margin: 10px auto;
+        }
+
+        .header-section {
+            background-color: #f0f0f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .header-section p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .links-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .link-item {
+            position: relative;
+            box-shadow:0 0 0 2px RGB(0,0,0);
+            border-radius: 12px;
+            overflow: hidden;
+            height: 200px;
+        }
+
+        .content-box {
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content-box.yellow {
+            background-color: #fffbe6;
+        }
+
+        .content-box.pink {
+            background-color: #ffe6ff;
+        }
+     .content-box.black {
+            background-color: RGB(45,45,45);
+        }
+
+        @media (max-width: 600px) {
+            .links-list {
+                grid-template-columns: 1fr;
+            }
+            
+            h1::after {
+                width: 80%;
+            }
+        }
+        .sponsor-button {
+  display: inline-block;
+  transition: filter 0.3s ease;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.0));
+}
+
+.sponsor-button:hover {
+  filter: drop-shadow(0 0 10px #fff) drop-shadow(0 0 20px rgba(148,109,232,0.8));
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>赞助列表❤️TOP SPONSORS</h1>
+        <div class="header-section">
+            <a onclick="window.open('https://afdian.com/a/EnderMo', '_blank');" class="sponsor-button"><img width="200" src="https://pic1.afdiancdn.com/static/img/welcome/button-sponsorme.png" alt=""></a >
+        </div>
+        <ul class="links-list">
+            <li class="link-item">
+                <div class="content-box"><img src="../img/sponsors/iyoroy.jpg" alt="SVG Image" width="100" height="100" style="border-radius:100px;"> <p style="font-size:28px;font-weight: 600;"> 悠笙iYoRoy</p></div>
+                <button class="innerItem" onclick="window.open('https://www.iyoroy.cn', '_blank');">出发！</button>
+            </li>
+            <li class="link-item">
+                <div class="content-box black"> <img src="../img/sponsors/c_net_logo.svg" alt="SVG Image" width="100" height="100"><p style="font-size:28px;font-weight: 600;color:#fff"> Christina Network</p></div>
+                <button class="innerItem" onclick="window.open('https://christina.network', '_blank');">出发！</button>
+            </li>
+             <li class="link-item">
+                <div class="content-box"> <img src="../img/sponsors/cabbage.png" alt="SVG Image" width="100" height="100"><p style="font-size:28px;font-weight: 600;">白菜Cabbage_Bai</p></div>
+                <button class="innerItem" onclick="window.open('http://www.cabbage-white.top/', '_blank');">出发！</button>
+            </li>
+             <li class="link-item">
+                <div class="content-box"> <img src="../img/sponsors/tuo.jpeg" alt="SVG Image" width="100" height="100" style="border-radius:100px;"><p style="font-size:24px;font-weight: 600;">Thallium_Ash【铊尘】</p></div>
+                <button class="innerItem" onclick="window.open('', '_blank');">出发！</button>
+            </li>
+            <li class="link-item">
+                <div class="content-box"> <img src="../img/sponsors/sg1.png" alt="SVG Image" width="100" height="100"><p style="font-size:28px;font-weight: 600;">Star Carefree</p></div>
+                <button class="innerItem" onclick="window.open('https://scarefree.cn', '_blank');">出发！</button>
+            </li>
+            <li class="link-item">
+                <div class="content-box" style="  background-size: cover; background-position: center; background-repeat: no-repeat;background-image:url('../img/sponsors/jostein.jpg');"><p style="font-size:28px;font-weight: 600;">Jostein Pan</p></div>
+                <button class="innerItem" onclick="window.open('https://pjs.rth2.xyz');">出发！</button>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
