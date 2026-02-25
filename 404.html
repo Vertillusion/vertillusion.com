@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>404 Not Found</title>
-    <link rel="stylesheet" href="https://www.vilinko.com/style/vina.min.test.css">
+    <title>404 Not Found - Ghost Flight</title>
     <style>
         body {
             margin: 0;
@@ -102,6 +101,9 @@
             height: 48px;
             padding: 0 24px !important;
             text-decoration: none;
+            background-color: #5279fb;
+            color: white;
+            border-radius: 8px;
         }
 
         #game-canvas {
@@ -144,6 +146,7 @@
         .chaos-active {
             animation: shake 0.5s infinite;
         }
+
         @keyframes shake {
             0% { transform: translate(0,0); }
             25% { transform: translate(2px,2px); }
@@ -174,7 +177,7 @@
         </div>
 
         <div class="action-area">
-            <a href="https://www.vilinko.com/" class="vina-control vina-button vina-button-primary vina-button-fix">
+            <a href="https://www.vilinko.com/" class="vina-button-fix">
                 Back Home
             </a>
         </div>
@@ -206,18 +209,22 @@
         let px = 0; 
         let vy = 0; 
         const gravity = 0.15;      
-        const flyPowerKbd = -0.45; // 键盘上升速度保持不变
-        const flyPowerTouch = -0.25; // 触控/鼠标上升速度降低
+        const flyPowerKbd = -0.45; 
+        const flyPowerTouch = -0.40;
         const maxSpeed = 8;         
         const moveSpeed = 7;
+        const touchCruiseSpeed = -3.5; 
+        
+        // --- 相对移动核心变量 ---
+        let lastActionX = null; 
+        const sensitivity = 1.0; // 灵敏度：1.0表示手指滑多远角色动多远
+
         let obstacles = [];
         let coins = []; 
         let candies = []; 
         let particles = []; 
         let frameCount = 0;
         const keys = {};
-        
-        let targetX = null;
 
         function initCanvas() {
             canvas.width = window.innerWidth;
@@ -227,14 +234,13 @@
         initCanvas();
 
         function handleActionStart(e) {
-            if (e.target.closest('a')) {
-                return; 
-            }
+            if (e.target.closest('a')) return;
 
+            // 记录触碰/点击的初始 X 坐标
             if (e.touches && e.touches[0]) {
-                targetX = e.touches[0].clientX;
-            } else if (e.clientX !== undefined) {
-                targetX = e.clientX;
+                lastActionX = e.touches[0].clientX;
+            } else {
+                lastActionX = e.clientX;
             }
 
             if (gameState === 'IDLE') {
@@ -249,18 +255,29 @@
         }
 
         function handleActionMove(e) {
-            if (gameState === 'PLAYING') {
+            if (gameState === 'PLAYING' && lastActionX !== null) {
+                let currentX;
                 if (e.touches && e.touches[0]) {
-                    targetX = e.touches[0].clientX;
+                    currentX = e.touches[0].clientX;
                 } else {
-                    targetX = e.clientX;
+                    currentX = e.clientX;
                 }
+
+                // 计算本次移动的差值
+                const deltaX = currentX - lastActionX;
+                
+                // 实时更新角色位置（相对增量）
+                px += deltaX * sensitivity;
+
+                // 更新上一次的位置，用于下一帧计算
+                lastActionX = currentX;
             }
+            if (e.cancelable) e.preventDefault();
         }
 
         function handleActionEnd() {
             keys['Action'] = false;
-            targetX = null; 
+            lastActionX = null; // 抬起时重置，防止下次点击时产生巨大跳跃
         }
 
         window.addEventListener('keydown', (e) => {
@@ -496,11 +513,15 @@
             if (gameState !== 'PLAYING') return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // 分别判断空格和触控升力
+            // 垂直运动逻辑
             if (keys['Space']) {
                 vy += flyPowerKbd;
             } else if (keys['Action']) {
-                vy += flyPowerTouch;
+                if (vy > touchCruiseSpeed) {
+                    vy += flyPowerTouch;
+                } else {
+                    vy = touchCruiseSpeed; 
+                }
             } else {
                 vy += gravity;
             }
@@ -509,17 +530,11 @@
             if (vy < -maxSpeed) vy = -maxSpeed;
             py += vy;
 
+            // 键盘左右移动
             if (keys['KeyA'] || keys['ArrowLeft']) px -= moveSpeed;
             if (keys['KeyD'] || keys['ArrowRight']) px += moveSpeed;
 
-            if (targetX !== null) {
-                const centerX = px + 40; 
-                const diff = targetX - centerX;
-                if (Math.abs(diff) > 5) {
-                    px += (diff > 0 ? moveSpeed : -moveSpeed);
-                }
-            }
-
+            // 限制范围
             if (py < 0) { py = 0; vy = 0.5; }
             if (py > canvas.height) { endGame(); return; }
             if (px < 0) px = 0;
@@ -607,7 +622,7 @@
 
             displayCode.style.fontFamily = 'Consolas, monospace';
             displayCode.innerHTML = 'GAME OVER!';
-            displayMsg.innerHTML = `Your Score: ${score}<br>Press <span class="kbd-key">SPACE</span> to try again!`;
+            displayMsg.innerHTML = `Your Score: ${score}<br>Press <span class="kbd-key">SPACE</span> or Tap to try again!`;
         }
     </script>
 </body>
