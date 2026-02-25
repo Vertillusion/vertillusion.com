@@ -1,244 +1,580 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
     <meta charset="UTF-8">
-    <title>VILINKO - 404</title>
-<script type="text/javascript">
-
-!function (e, t, a) {
-  var colorIndex = 0;
-  var isMouseDown = false;
-  var lastX = 0;
-  var lastY = 0;
-  var lastStarTime = 0;
-  var isDragging = false;
-  
-  function r() {
-    for (var e = 0; e < s.length; e++)
-      s[e].alpha <= 0
-        ? (t.body.removeChild(s[e].el), s.splice(e, 1))
-        : (
-            s[e].y--,
-            s[e].scale += .004,
-            s[e].alpha -= .013,
-            s[e].el.style.left = s[e].x + "px",
-            s[e].el.style.top = s[e].y + "px",
-            s[e].el.style.opacity = s[e].alpha,
-            s[e].el.style.transform = "scale(" + s[e].scale + ")",
-            s[e].el.style.zIndex = "99999"
-          );
-    requestAnimationFrame(r);
-  }
-
-  function n() {
-    // 移除原有的click事件处理，避免冲突
-    var t = "function" == typeof e.onclick && e.onclick;
-    
-    // 添加鼠标事件监听
-    e.addEventListener('mousedown', function(e) {
-      isMouseDown = true;
-      isDragging = false;
-      lastX = e.clientX;
-      lastY = e.clientY;
-      o(e);
-    });
-    
-    e.addEventListener('mousemove', function(e) {
-      if (isMouseDown) {
-        isDragging = true;
-        var now = Date.now();
-        if (now - lastStarTime > 50) {
-          var distance = Math.sqrt(Math.pow(e.clientX - lastX, 2) + Math.pow(e.clientY - lastY, 2));
-          if (distance > 10) {
-            o(e);
-            lastX = e.clientX;
-            lastY = e.clientY;
-            lastStarTime = now;
-          }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>404 Not Found</title>
+    <link rel="stylesheet" href="https://www.vilinko.com/style/vina.min.test.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f3f4f6;
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            overflow: hidden;
+            touch-action: none;
         }
-      }
-    });
-    
-    e.addEventListener('mouseup', function(e) {
-      isMouseDown = false;
-      if (!isDragging) {
-        // 不再额外创建星星，因为mousedown已经创建了
-      }
-      isDragging = false;
-    });
-    
-    e.addEventListener('mouseleave', function() {
-      isMouseDown = false;
-      isDragging = false;
-    });
-    
-    if (t) {
-      e.addEventListener('click', t);
-    }
-  }
 
-  function o(e) {
-    var a = t.createElement("div");
-    a.style.position = "fixed";
-    a.style.pointerEvents = "none";
-    var color = c();
-    // 24x24像素的星星
-    a.innerHTML = '<svg width="24" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill="' + color + '" d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828l.645-1.937z"/></svg>';
-    s.push({
-      el: a,
-      x: e.clientX - 12,
-      y: e.clientY - 12,
-      scale: 1,
-      alpha: 1
-    });
-    t.body.appendChild(a);
-  }
+        .error-container {
+            width: 90%;
+            max-width: 500px;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb; 
+            border-radius: 12px;  
+            padding: 40px;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s;
+            z-index: 10;
+        }
 
-  function c() {
-    var colors = [
-      '#FF9AA2', '#F8B195', '#FFB7B2', '#F67280', '#FFDAC1',
-      '#FFE5D9', '#E2F0CB', '#A8E6CF', '#B5EAD7', '#98DDCA',
-      '#C7CEEA', '#D291BC', '#C06C84', '#D4A5A5'
-    ];
-    
-    var index = Math.floor(colorIndex) % colors.length;
-    colorIndex += 0.3;
-    
-    if (colorIndex >= colors.length) {
-      colorIndex = 0;
-    }
-    
-    return colors[index];
-  }
+        .error-content {
+            margin-bottom: 30px;
+            text-align: center;
+        }
 
-  var s = [];
-  e.requestAnimationFrame =
-    e.requestAnimationFrame ||
-    e.webkitRequestAnimationFrame ||
-    e.mozRequestAnimationFrame ||
-    e.oRequestAnimationFrame ||
-    e.msRequestAnimationFrame ||
-    function (e) {
-      setTimeout(e, 1e3 / 60);
-    };
+        .error-code {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(3.5rem, 15vw, 7rem);
+            font-weight: 800;
+            color: #5279fb;
+            margin: 0 0 10px 0;
+            line-height: 1;
+        }
 
-  n(), r();
-}(window, document);
+        .error-code img {
+            height: 1.2em;
+            width: auto;
+            transform: translateX(0.1em);
+            margin: 0 2px;
+            display: block;
+        }
 
-</script>
-<style>
-html{
-	-webkit-touch-callout: none;
--webkit-user-select: none;
--khtml-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
-}
-	.boxframe{
+        .error-message {
+            font-size: 1.25rem;
+            color: #4b5563;
+            line-height: 1.6;
+            font-weight: 400;
+            margin: 0;
+        }
 
-		backdrop-filter:blur(10px);
-		position: absolute;
-		width:30%;
-		height:60%;
-		padding: 20px; 
-		border-radius: 20px;
-		left:50%;
-		top:50%;
-		background:rgba(244,244,244,0.1);
-		transform: translate(-50%, -50%) scale(1);
-		box-shadow:0 0 0 2px #fff;
-		transition:0.3s;
-	}
-	.boxframe:hover{
+        /* 键盘按键样式 */
+        .kbd-key {
+            display: inline-block;
+            padding: 2px 8px;
+            font-family: inherit;
+            font-size: 0.8em;
+            font-weight: 600;
+            line-height: 1;
+            color: #374151;
+            background-color: #f9fafb;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            box-shadow: 0 2px 0 #d1d5db;
+            margin: 0 4px;
+            vertical-align: middle;
+        }
 
-		backdrop-filter:blur(10px);
-		position: absolute;
-		width:30%;
-		height:60%;
-		padding: 20px; 
-		border-radius: 20px;
-		left:50%;
-		top:50%;
-		background:rgba(244,244,244,0.1);
-		transform: translate(-50%, -50%) scale(1.005);
-		transition:0.3s;
-		box-shadow:0 0 0 2px #fff;
-	}
-	@media screen and (max-width: 1200px) {
- 	.boxframe{
+        .action-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
 
-		backdrop-filter:blur(10px);
-		position: absolute;
-		width:80%;
-		height:65%;
-		padding: 20px; 
-		border-radius: 20px;
-		left:50%;
-		top:50%;
-		background:rgba(244,244,244,0.1);
-		transform: translate(-50%, -50%) scale(1);
-		box-shadow:0 0 0 2px #fff;
-		transition:0.3s;
-	}
-	.boxframe:hover{
+        .vina-button-fix {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            min-width: 140px;
+            height: 48px;
+            padding: 0 24px !important;
+            text-decoration: none;
+        }
 
-		backdrop-filter:blur(10px);
-		position: absolute;
-		width:80%;
-		height:65%;
-		padding: 20px; 
-		border-radius: 20px;
-		left:50%;
-		top:50%;
-		background:rgba(244,244,244,0.1);
-		transform: translate(-50%, -50%) scale(1.005);
-		transition:0.3s;
-		box-shadow:0 0 0 2px #fff;
-	}
-}
-	.boxIframe{
-		/*backdrop-filter:blur(0px);*/
-                             display: block; 
-		position: relative;
-		font-size: 20px;
-		color:rgba(244,244,244,1);
-		width:90%;
-		height:10% + 2;
-		vertical-align:middle; 
-		line-height:80%; 
-		padding: 20px; 
-		border-radius: 10px;
-		background:rgba(244,244,244,0.1);
-		top:8px;
-		margin-top:10px;
-	    /*top:50%;
-		right:0%;
-		transform: translate(-10%, -50%);*/
-	}
-</style>
+        #game-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: none;
+        }
 
+        #player-ghost {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            left: 50%;
+            bottom: -100px;
+            transform: translateX(-50%);
+            transition: bottom 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 20;
+            display: none;
+        }
 
-<link rel="stylesheet" href="css/normalize.min.css">
-<link rel="stylesheet" href="creation/css/style.css">
+        .game-active .error-container {
+            transform: translateY(120vh);
+            opacity: 0;
+        }
 
+        .score-board {
+            position: fixed;
+            top: 20px;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #5279fb;
+            display: none;
+            z-index: 100;
+        }
+        
+        .chaos-active {
+            animation: shake 0.5s infinite;
+        }
+        @keyframes shake {
+            0% { transform: translate(0,0); }
+            25% { transform: translate(2px,2px); }
+            50% { transform: translate(-2px,0); }
+            75% { transform: translate(2px,-2px); }
+            100% { transform: translate(0,0); }
+        }
+
+        .copyright {
+            position: fixed;
+            bottom: 10px;
+            font-size: 12px;
+            color: #9ca3af;
+            z-index: 5;
+        }
+    </style>
 </head>
 <body>
 
-<script>
-document.body.style.overflow = "hidden";
+    <div class="error-container" id="main-container">
+        <div class="error-content">
+            <h1 class="error-code" id="display-code">
+                4 <img src="https://www.vilinko.com/res/img/test.svg" alt="0"> 4
+            </h1>
+            <p class="error-message" id="display-msg">
+                Sorry, the page you looking for could not be found.<br>
+            </p>
+        </div>
 
-</script>
+        <div class="action-area">
+            <a href="https://www.vilinko.com/" class="vina-control vina-button vina-button-primary vina-button-fix">
+                Back Home
+            </a>
+        </div>
+    </div>
 
-	<style>
-body{background: url(https://www.vilinko.com/res/img/LitNight_sky.png) no-repeat;background-size:cover;background-attachment:fixed;}
-</style>
-<body>
-<div class="boxframe">
-  <h2 style="color:#fff;">404<br />抱歉，我们无法找到你所需要的页面。<br /> 没关系，来看星星吧~✨<br /> Sorry,we can't find the page that u request.It doesn't matter!Let's stargazing!</h2>
-	<div class="boxIframe"><a href="https://www.vilinko.com">返回主站 Back to Mainsite</a></div>
-	<div class="boxIframe"><a href="https://vilinko-studio.feishu.cn/share/base/form/shrcnMi5t1NY40A0fjdTN2oRO5e?prefill_%E6%82%A8%E8%83%BD%E5%91%8A%E8%AF%89%E6%88%91%E4%BB%AC%E9%97%AE%E9%A2%98%E7%9A%84%E5%8F%91%E7%94%9F%E4%BD%8D%E7%BD%AE%E5%90%97%EF%BC%9F%EF%BC%88Can+you+tell+me+where+the+problem+occurred%3F%EF%BC%89=%E7%BD%91%E7%AB%99%EF%BC%88Website%EF%BC%89">创建工单 Go to Feedback</a></div>
-</div>
+    <img src="https://www.vilinko.com/res/img/cute_ghost.png" id="player-ghost" alt="ghost">
+    
+    <canvas id="game-canvas"></canvas>
+    <div id="score" class="score-board">0</div>
+
+    <div class="copyright">Copyright © Vilinko.All rights reserved.</div>
+
+    <script>
+        const container = document.getElementById('main-container');
+        const ghost = document.getElementById('player-ghost');
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        const displayCode = document.getElementById('display-code');
+        const displayMsg = document.getElementById('display-msg');
+
+        let gameState = 'IDLE';
+        let score = 0;
+        let animationId;
+        let isChaosMode = false;
+        let chaosTimer = null;
+
+        let py = 0; 
+        let px = 0; 
+        let vy = 0; 
+        const gravity = 0.15;      
+        const flyPower = -0.45;    
+        const maxSpeed = 8;        
+        const moveSpeed = 7;
+        let obstacles = [];
+        let coins = []; 
+        let candies = []; 
+        let particles = []; 
+        let frameCount = 0;
+        const keys = {};
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+
+      function handleActionStart(e) {
+        if (e.target.closest('a')) {
+            return; 
+        }
+
+        if (gameState === 'IDLE') {
+            keys['Action'] = true;
+            startTransition();
+        } else if (gameState === 'PLAYING') {
+            keys['Action'] = true;
+        } else if (gameState === 'GAME OVER') {
+            location.reload(); 
+        }
+        if (e.cancelable) e.preventDefault();
+    }
+
+        function handleActionEnd() {
+            keys['Action'] = false;
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                if (gameState === 'GAME OVER') {
+                    location.reload();
+                } else {
+                    handleActionStart(e);
+                }
+            }
+            keys[e.code] = true;
+        });
+        window.addEventListener('keyup', (e) => {
+            if (e.code === 'Space') handleActionEnd();
+            keys[e.code] = false;
+        });
+
+        window.addEventListener('touchstart', handleActionStart, { passive: false });
+        window.addEventListener('touchend', handleActionEnd);
+        window.addEventListener('mousedown', (e) => {
+            if(e.button === 0) handleActionStart(e); 
+        });
+        window.addEventListener('mouseup', handleActionEnd);
+
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', (e) => {
+                if (e.gamma > 10) { keys['ArrowRight'] = true; keys['ArrowLeft'] = false; }
+                else if (e.gamma < -10) { keys['ArrowLeft'] = true; keys['ArrowRight'] = false; }
+                else { keys['ArrowLeft'] = false; keys['ArrowRight'] = false; }
+            }, true);
+        }
+
+        function startTransition() {
+            gameState = 'TRANSITION';
+            document.body.classList.add('game-active');
+            ghost.style.display = 'block';
+            setTimeout(() => {
+                ghost.style.bottom = '40%'; 
+            }, 50);
+
+            setTimeout(() => {
+                startGame();
+            }, 1200);
+        }
+
+        function startGame() {
+            canvas.style.display = 'block';
+            scoreElement.style.display = 'block';
+            ghost.style.transition = 'none'; 
+            const rect = ghost.getBoundingClientRect();
+            px = rect.left;
+            py = rect.top;
+            vy = -2; 
+            ghost.style.transform = 'none';
+            ghost.style.margin = '0';
+            gameState = 'PLAYING';
+            gameLoop();
+        }
+
+        function generateOffsets() {
+            const offset = 4;
+            return Array.from({ length: 12 }, () => (Math.random() - 0.5) * offset);
+        }
+
+        function createObstacle(customX, customY) {
+            const size = 30 + Math.random() * 50;
+            obstacles.push({
+                x: customX ?? Math.random() * (canvas.width - size),
+                y: customY ?? -size,
+                w: size,
+                h: size,
+                speed: 3 + (score * 0.1),
+                vx: (Math.random() - 0.5) * 10, 
+                vy: (Math.random() - 0.5) * 10,
+                offsets: generateOffsets(),
+                lastUpdate: Date.now()
+            });
+        }
+
+        function createCoin(customX, customY) {
+            const size = 30;
+            coins.push({
+                x: customX ?? Math.random() * (canvas.width - size),
+                y: customY ?? -size,
+                w: size,
+                h: size,
+                speed: 2.5 + (score * 0.05),
+                vx: (Math.random() - 0.5) * 12,
+                vy: (Math.random() - 0.5) * 12,
+                offsets: generateOffsets(),
+                lastUpdate: Date.now()
+            });
+        }
+
+        function createCandy() {
+            const size = 30;
+            candies.push({
+                x: Math.random() * (canvas.width - size),
+                y: -size,
+                w: size,
+                h: size,
+                speed: 3,
+                vx: (Math.random() - 0.5) * 8,
+                vy: (Math.random() - 0.5) * 8,
+                offsets: generateOffsets(),
+                lastUpdate: Date.now()
+            });
+        }
+
+        function activateChaosMode() {
+            isChaosMode = true;
+            scoreElement.classList.add('chaos-active');
+            if(chaosTimer) clearTimeout(chaosTimer);
+            chaosTimer = setTimeout(() => {
+                isChaosMode = false;
+                scoreElement.classList.remove('chaos-active');
+                chaosTimer = null;
+            }, 15000);
+        }
+
+        function createExplosion(x, y, color) {
+            for (let i = 0; i < 12; i++) {
+                particles.push({
+                    x, y,
+                    vx: (Math.random() - 0.5) * 10,
+                    vy: (Math.random() - 0.5) * 10,
+                    life: 1.0,
+                    color: color
+                });
+            }
+        }
+
+        function drawHandDrawnPath(x, y, w, h, off) {
+            ctx.beginPath();
+            ctx.moveTo(x + off[0], y + off[1]);
+            ctx.quadraticCurveTo(x + w/2 + off[2], y + off[3], x + w + off[4], y + off[5]);
+            ctx.quadraticCurveTo(x + w + off[6], y + h/2 + off[7], x + w + off[8], y + h + off[9]);
+            ctx.quadraticCurveTo(x + w/2 + off[0], y + h + off[1], x + off[2], y + h + off[3]);
+            ctx.quadraticCurveTo(x + off[4], y + h/2 + off[5], x + off[6], y + off[7]);
+            ctx.closePath();
+        }
+
+        function drawHandDrawnStar(x, y, w, h, off) {
+            const cx = x + w/2;
+            const cy = y + h/2;
+            ctx.beginPath();
+            ctx.moveTo(cx + off[0], y + off[1]);
+            ctx.quadraticCurveTo(cx + off[2], cy + off[3], x + w + off[4], cy + off[5]);
+            ctx.quadraticCurveTo(cx + off[6], cy + off[7], cx + off[8], y + h + off[9]);
+            ctx.quadraticCurveTo(cx + off[1], cy + off[2], x + off[3], cy + off[4]);
+            ctx.quadraticCurveTo(cx + off[5], cy + off[6], cx + off[0], y + off[1]);
+            ctx.closePath();
+        }
+
+        function drawCandy(obj) {
+            const now = Date.now();
+            if (now - obj.lastUpdate > 300) {
+                obj.offsets = generateOffsets();
+                obj.lastUpdate = now;
+            }
+            const {x, y, w, h, offsets: off} = obj;
+            ctx.save();
+            const strokeColor = '#1e40af'; 
+            const fillColor = '#a5f3fc';   
+            ctx.fillStyle = fillColor;
+            ctx.strokeStyle = strokeColor;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(x + off[0], y + h/2 + off[1]);
+            ctx.lineTo(x - 12 + off[2], y + off[3]);
+            ctx.lineTo(x - 12 + off[4], y + h + off[5]);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x + w + off[6], y + h/2 + off[7]);
+            ctx.lineTo(x + w + 12 + off[8], y + off[9]);
+            ctx.lineTo(x + w + 12 + off[10], y + h + off[11]);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+            ctx.fillStyle = fillColor;
+            ctx.beginPath();
+            ctx.moveTo(x + off[0], y + h/2 + off[1]);
+            ctx.bezierCurveTo(x + off[2], y + off[3], x + w + off[4], y + off[5], x + w + off[6], y + h/2 + off[7]);
+            ctx.bezierCurveTo(x + w + off[8], y + h + off[9], x + off[10], y + h + off[11], x + off[0], y + h/2 + off[1]);
+            ctx.fill();
+            ctx.strokeStyle = strokeColor;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        function drawObstacle(obj) {
+            const now = Date.now();
+            if (now - obj.lastUpdate > 500) {
+                obj.offsets = generateOffsets();
+                obj.lastUpdate = now;
+            }
+            ctx.save();
+            ctx.fillStyle = '#4b5563'; 
+            drawHandDrawnPath(obj.x, obj.y, obj.w, obj.h, obj.offsets);
+            ctx.fill();
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        function drawCoin(obj) {
+            const now = Date.now();
+            if (now - obj.lastUpdate > 300) {
+                obj.offsets = generateOffsets();
+                obj.lastUpdate = now;
+            }
+            ctx.save();
+            ctx.fillStyle = '#facc15';
+            drawHandDrawnStar(obj.x, obj.y, obj.w, obj.h, obj.offsets);
+            ctx.fill();
+            ctx.strokeStyle = '#854d0e';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        function updateObjectPos(o) {
+            if (isChaosMode) {
+                o.x += o.vx + (Math.sin(frameCount * 0.1) * 2); 
+                o.y += o.speed + o.vy * 0.25; 
+                if (o.x < 0 || o.x > canvas.width - o.w) o.vx *= -1;
+            } else {
+                o.y += o.speed;
+            }
+        }
+
+        function gameLoop() {
+            if (gameState !== 'PLAYING') return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (keys['Space'] || keys['Action']) vy += flyPower;
+            else vy += gravity;
+            if (vy > maxSpeed) vy = maxSpeed;
+            if (vy < -maxSpeed) vy = -maxSpeed;
+            py += vy;
+            if (keys['KeyA'] || keys['ArrowLeft']) px -= moveSpeed;
+            if (keys['KeyD'] || keys['ArrowRight']) px += moveSpeed;
+            if (py < 0) { py = 0; vy = 0.5; }
+            if (py > canvas.height) { endGame(); return; }
+            if (px < 0) px = 0;
+            if (px > canvas.width - 50) px = canvas.width - 50;
+            ghost.style.top = py + 'px';
+            ghost.style.left = px + 'px';
+            if (frameCount % 60 === 0) createObstacle();
+            if (frameCount % 90 === 0) createCoin();
+            if (frameCount % 300 === 0) createCandy(); 
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                let o = obstacles[i];
+                updateObjectPos(o);
+                drawObstacle(o);
+                if (px < o.x + o.w && px + 40 > o.x && py < o.y + o.h && py + 40 > o.y) {
+                    endGame(); return;
+                }
+                if (!isChaosMode && o.y > canvas.height) obstacles.splice(i, 1);
+            }
+            for (let i = coins.length - 1; i >= 0; i--) {
+                let c = coins[i];
+                updateObjectPos(c);
+                drawCoin(c);
+                if (px < c.x + c.w && px + 40 > c.x && py < c.y + c.h && py + 40 > c.y) {
+                    coins.splice(i, 1);
+                    score++;
+                    scoreElement.innerText = score;
+                    continue;
+                }
+                if (!isChaosMode && c.y > canvas.height) coins.splice(i, 1);
+            }
+            for (let i = candies.length - 1; i >= 0; i--) {
+                let candy = candies[i];
+                updateObjectPos(candy);
+                drawCandy(candy);
+                if (px < candy.x + candy.w && px + 40 > candy.x && py < candy.y + candy.h && py + 40 > candy.y) {
+                    createExplosion(candy.x + candy.w/2, candy.y + candy.h/2, '#a5f3fc');
+                    const rand = Math.random();
+                    if (rand < 0.43) {
+                        const burstCount = 3 + Math.floor(Math.random() * 3);
+                        for(let j=0; j<burstCount; j++) {
+                            const spread = (j - (burstCount - 1) / 2) * 60; 
+                            createCoin(candy.x + spread, candy.y - 150);
+                        }
+                    } else if (rand < 0.85) {
+                        const burstCount = 3 + Math.floor(Math.random() * 3);
+                        for(let j=0; j<burstCount; j++) {
+                            const spread = (j - (burstCount - 1) / 2) * 60; 
+                            createObstacle(candy.x + spread, candy.y - 150);
+                        }
+                    } else {
+                        activateChaosMode();
+                    }
+                    candies.splice(i, 1);
+                    continue;
+                }
+                if (!isChaosMode && candy.y > canvas.height) candies.splice(i, 1);
+            }
+            for (let i = particles.length - 1; i >= 0; i--) {
+                let p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.life -= 0.02;
+                ctx.globalAlpha = p.life;
+                ctx.fillStyle = p.color;
+                ctx.fillRect(p.x, p.y, 6, 6);
+                ctx.globalAlpha = 1.0;
+                if (p.life <= 0) particles.splice(i, 1);
+            }
+            frameCount++;
+            animationId = requestAnimationFrame(gameLoop);
+        }
+
+        function endGame() {
+            gameState = 'GAME OVER';
+            cancelAnimationFrame(animationId);
+            if(chaosTimer) clearTimeout(chaosTimer);
+
+            document.body.classList.remove('game-active');
+            canvas.style.display = 'none';
+            scoreElement.style.display = 'none';
+            ghost.style.display = 'none';
+
+            displayCode.style.fontFamily = 'Consolas, monospace';
+            displayCode.innerHTML = 'GAME OVER!';
+            
+            // 替换 Better luck，并添加键盘样式的 SPACE
+            displayMsg.innerHTML = `Your Score: ${score}<br>Press <span class="kbd-key">SPACE</span> to try again!`;
+        }
+    </script>
 </body>
 </html>
