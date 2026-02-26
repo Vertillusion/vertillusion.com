@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://www.vilinko.com/style/vina.min.test.css">
-    <title>404 Not Found - Ghost Flight</title>
+    <title>404 Not Found</title>
     <style>
         body {
             margin: 0;
@@ -14,7 +14,8 @@
             justify-content: center;
             min-height: 100vh;
             background-color: #f3f4f6;
-            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            /* 修改 1: 让背景小圆点更明显一点点 (#e5e7eb -> #d1d5db) */
+            background-image: radial-gradient(#d1d5db 1px, transparent 1px);
             background-size: 20px 20px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             overflow: hidden;
@@ -94,23 +95,14 @@
         }
 
      .vina-button-fix {
-
             display: flex !important;
-
             align-items: center !important;
-
             justify-content: center !important;
-
             text-align: center !important;
-
             min-width: 140px;
-
             height: 48px;
-
             padding: 0 24px !important;
-
             text-decoration: none;
-
         }
 
         #game-canvas {
@@ -210,7 +202,9 @@
         let score = 0;
         let animationId;
         let isChaosMode = false;
+        let isMidasMode = false; // 新增：点金手模式标记
         let chaosTimer = null;
+        let midasTimer = null;   // 新增：点金手计时器
 
         let py = 0; 
         let px = 0; 
@@ -222,9 +216,8 @@
         const moveSpeed = 7;
         const touchCruiseSpeed = -3.5; 
         
-        // --- 相对移动核心变量 ---
         let lastActionX = null; 
-        const sensitivity = 1.0; // 灵敏度：1.0表示手指滑多远角色动多远
+        const sensitivity = 1.0; 
 
         let obstacles = [];
         let coins = []; 
@@ -243,7 +236,6 @@
         function handleActionStart(e) {
             if (e.target.closest('a')) return;
 
-            // 记录触碰/点击的初始 X 坐标
             if (e.touches && e.touches[0]) {
                 lastActionX = e.touches[0].clientX;
             } else {
@@ -251,7 +243,6 @@
             }
 
             if (gameState === 'IDLE') {
-                keys['Action'] = true;
                 startTransition();
             } else if (gameState === 'PLAYING') {
                 keys['Action'] = true;
@@ -269,14 +260,8 @@
                 } else {
                     currentX = e.clientX;
                 }
-
-                // 计算本次移动的差值
                 const deltaX = currentX - lastActionX;
-                
-                // 实时更新角色位置（相对增量）
                 px += deltaX * sensitivity;
-
-                // 更新上一次的位置，用于下一帧计算
                 lastActionX = currentX;
             }
             if (e.cancelable) e.preventDefault();
@@ -284,21 +269,18 @@
 
         function handleActionEnd() {
             keys['Action'] = false;
-            lastActionX = null; // 抬起时重置，防止下次点击时产生巨大跳跃
+            lastActionX = null; 
         }
 
         window.addEventListener('keydown', (e) => {
-            if (e.code === 'Space') {
-                if (gameState === 'GAME OVER') {
-                    location.reload();
-                } else {
-                    handleActionStart(e);
-                }
-            }
             keys[e.code] = true;
+            if (e.code === 'Space') {
+                if (gameState === 'IDLE') startTransition();
+                else if (gameState === 'GAME OVER') location.reload();
+            }
         });
+
         window.addEventListener('keyup', (e) => {
-            if (e.code === 'Space') handleActionEnd();
             keys[e.code] = false;
         });
 
@@ -401,6 +383,16 @@
             }, 15000);
         }
 
+        // 修改 2: 实现碰到糖果的第四种模式 (障碍变硬币)
+        function activateMidasMode() {
+            isMidasMode = true;
+            if(midasTimer) clearTimeout(midasTimer);
+            midasTimer = setTimeout(() => {
+                isMidasMode = false;
+                midasTimer = null;
+            }, 10000);
+        }
+
         function createExplosion(x, y, color) {
             for (let i = 0; i < 12; i++) {
                 particles.push({
@@ -481,10 +473,17 @@
                 obj.lastUpdate = now;
             }
             ctx.save();
-            ctx.fillStyle = '#4b5563'; 
-            drawHandDrawnPath(obj.x, obj.y, obj.w, obj.h, obj.offsets);
-            ctx.fill();
-            ctx.strokeStyle = '#ffffff';
+            if(isMidasMode) {
+                ctx.fillStyle = '#facc15';
+                drawHandDrawnStar(obj.x, obj.y, obj.w, obj.h, obj.offsets);
+                ctx.fill();
+                ctx.strokeStyle = '#854d0e';
+            } else {
+                ctx.fillStyle = '#ffffff'; 
+                drawHandDrawnPath(obj.x, obj.y, obj.w, obj.h, obj.offsets);
+                ctx.fill();
+                ctx.strokeStyle = '#141414';
+            }
             ctx.lineWidth = 3;
             ctx.stroke();
             ctx.restore();
@@ -520,7 +519,6 @@
             if (gameState !== 'PLAYING') return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // 垂直运动逻辑
             if (keys['Space']) {
                 vy += flyPowerKbd;
             } else if (keys['Action']) {
@@ -537,11 +535,9 @@
             if (vy < -maxSpeed) vy = -maxSpeed;
             py += vy;
 
-            // 键盘左右移动
             if (keys['KeyA'] || keys['ArrowLeft']) px -= moveSpeed;
             if (keys['KeyD'] || keys['ArrowRight']) px += moveSpeed;
 
-            // 限制范围
             if (py < 0) { py = 0; vy = 0.5; }
             if (py > canvas.height) { endGame(); return; }
             if (px < 0) px = 0;
@@ -559,7 +555,15 @@
                 updateObjectPos(o);
                 drawObstacle(o);
                 if (px < o.x + o.w && px + 40 > o.x && py < o.y + o.h && py + 40 > o.y) {
-                    endGame(); return;
+                    // 修改 2: 点金手模式下，碰到障碍物变为加分而非死亡
+                    if (isMidasMode) {
+                        obstacles.splice(i, 1);
+                        score++;
+                        scoreElement.innerText = score;
+                        createExplosion(o.x + o.w/2, o.y + o.h/2, '#facc15');
+                    } else {
+                        endGame(); return;
+                    }
                 }
                 if (!isChaosMode && o.y > canvas.height) obstacles.splice(i, 1);
             }
@@ -582,20 +586,23 @@
                 if (px < candy.x + candy.w && px + 40 > candy.x && py < candy.y + candy.h && py + 40 > candy.y) {
                     createExplosion(candy.x + candy.w/2, candy.y + candy.h/2, '#a5f3fc');
                     const rand = Math.random();
-                    if (rand < 0.43) {
+                    // 修改 2: 重新分配概率实现第四种模式 (15% 概率)
+                    if (rand < 0.35) { // 35% 喷发硬币
                         const burstCount = 3 + Math.floor(Math.random() * 3);
                         for(let j=0; j<burstCount; j++) {
                             const spread = (j - (burstCount - 1) / 2) * 60; 
                             createCoin(candy.x + spread, candy.y - 150);
                         }
-                    } else if (rand < 0.85) {
+                    } else if (rand < 0.70) { // 35% 喷发障碍
                         const burstCount = 3 + Math.floor(Math.random() * 3);
                         for(let j=0; j<burstCount; j++) {
                             const spread = (j - (burstCount - 1) / 2) * 60; 
                             createObstacle(candy.x + spread, candy.y - 150);
                         }
-                    } else {
+                    } else if (rand < 0.85) { // 15% 混乱模式
                         activateChaosMode();
+                    } else { // 15% 点金手模式 (新增)
+                        activateMidasMode();
                     }
                     candies.splice(i, 1);
                     continue;
@@ -621,6 +628,7 @@
             gameState = 'GAME OVER';
             cancelAnimationFrame(animationId);
             if(chaosTimer) clearTimeout(chaosTimer);
+            if(midasTimer) clearTimeout(midasTimer);
 
             document.body.classList.remove('game-active');
             canvas.style.display = 'none';
